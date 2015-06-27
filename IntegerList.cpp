@@ -28,15 +28,10 @@ void IntegerList::push(int value) {
 
 /**
     Removes and returns a single value from the top of the list.
-    Returns nullptr if the list is currently empty.
 
-    \returns int The top list element, or nullptr if the list is empty.
+    \returns int The top list element.
 */
 int IntegerList::pop() {
-
-    if (length == 0) {
-        return nullptr;
-    }
 
   int returnValue = list[0];
 
@@ -72,15 +67,10 @@ void IntegerList::pushEnd(int value) {
 
 /**
     Removes and returns a single value from the bottom of the list.
-    Returns nullptr if the list is currently empty.
 
-    \returns int The bottom list element, or nullptr if the list is empty.
+    \returns int The bottom list element.
 */
 int IntegerList::popEnd() {
-
-    if (length == 0) {
-        return nullptr;
-    }
 
   int returnValue = list[--length];
   int *newList = new int[length];
@@ -105,16 +95,12 @@ int IntegerList::getLength() {
 
 /**
     Given an index value, returns the element at the given index value.
-    Returns nullptr if the index position is invalid.
     \param element int A valid list index value.
-    \returns int The integer at the given index, or nullptr if index is invalid.
+    \returns int The integer at the given index.
 */
 int IntegerList::getElement(int element) {
 
-    if (element < length && element >= 0) {
-        return list[element];
-    } else {
-        return nullptr;
-    }
+    return list[element];
+
 
 }
