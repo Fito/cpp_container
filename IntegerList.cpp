@@ -8,15 +8,16 @@
 #include <iostream>
 #include "IntegerList.h"
 
-/** Default constructor class. Takes no arguments */
+/** Default constructor class. Takes no arguments. */
 IntegerList::IntegerList():
   list(new int[0]),
   length(0)
   {};
 
 /**
-    Pushes a new value to the top of the list.
-    \param value int An integer value to add to the top of the list.
+*   Adds a new value to the top of the list.
+*
+*    \param value int An integer value to add to the top of the list.
 */
 void IntegerList::push(int value) {
 
@@ -33,9 +34,9 @@ void IntegerList::push(int value) {
 }
 
 /**
-    Removes and returns a single value from the top of the list.
-
-    \returns int The top list element.
+*   Removes and returns a single value from the top of the list.
+*
+*   \returns int The top element of the list.
 */
 int IntegerList::pop() {
 
@@ -56,8 +57,9 @@ int IntegerList::pop() {
 }
 
 /**
-    Pushes a new value to the bottom of the list.
-    \param value int An integer value to add to the bottom of the list.
+*   Adds a new value to the bottom of the list.
+*
+*   \param value int An integer value to add to the bottom of the list.
 */
 void IntegerList::pushEnd(int value) {
 
@@ -74,9 +76,9 @@ void IntegerList::pushEnd(int value) {
 }
 
 /**
-    Removes and returns a single value from the bottom of the list.
-
-    \returns int The bottom list element.
+*    Removes and returns a single value from the bottom of the list.
+*
+*    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
 
@@ -94,17 +96,20 @@ int IntegerList::popEnd() {
 }
 
 /**
-    Returns the current length of the list. May be zero.
-    \returns int The current length of the list.
+*    Returns the current length of the list. May be zero.
+*
+*    \returns int The current length of the list.
 */
 int IntegerList::getLength() {
   return length;
 }
 
 /**
-    Given an index value, returns the element at the given index value.
-    \param element int A valid list index value.
-    \returns int The integer at the given index.
+*    Given an index value, returns the element at the given index value without removing it.
+*
+*    \param element int A valid index value.
+*
+*    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
 
