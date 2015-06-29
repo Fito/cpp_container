@@ -19,10 +19,11 @@ IntegerList::IntegerList():
     \param value int An integer value to add to the top of the list.
 */
 void IntegerList::push(int value) {
-  length++;
-  int *newList = new int[length];
+
+  int *newList = new int[++length];
 
   newList[0] = value;
+
   for(int i=0; i<length; i++) {
     newList[i+1] = list[i];
   }
@@ -59,11 +60,13 @@ int IntegerList::pop() {
     \param value int An integer value to add to the bottom of the list.
 */
 void IntegerList::pushEnd(int value) {
+
   int *newList = new int[length + 1];
 
   for(int i=0; i<length; i++) {
     newList[i] = list[i];
   }
+
   newList[length++] = value;
 
   delete[] list;
