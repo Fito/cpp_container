@@ -1,3 +1,8 @@
+/* In IntegerList.cpp
+ * 6/29/15
+ * Brook Thomas - Adolfo von Zastrow
+ */
+
 /** \file IntegerList.cpp */
 
 #include <iostream>
