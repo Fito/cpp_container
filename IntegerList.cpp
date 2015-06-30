@@ -25,12 +25,8 @@ void IntegerList::push(int value) {
 
   newList[0] = value;
 
-  for(int i=0; i<length; i++) {
-    newList[i+1] = list[i];
-  }
-
-  delete[] list;
-  list = newList;
+  copyArray(list, newList + 1);
+  replaceList(newList);
 }
 
 /**
@@ -44,14 +40,10 @@ int IntegerList::pop() {
 
   int *newList = new int[length];
 
-  for(int i=1; i<length; i++) {
-    newList[i-1] = list[i];
-  }
+  copyArray(list + 1, newList);
+  replaceList(newList);
 
   length--;
-
-  delete[] list;
-  list = newList;
 
   return returnValue;
 }
@@ -65,14 +57,10 @@ void IntegerList::pushEnd(int value) {
 
   int *newList = new int[length + 1];
 
-  for(int i=0; i<length; i++) {
-    newList[i] = list[i];
-  }
+  copyArray(list, newList);
+  replaceList(newList);
 
-  newList[length++] = value;
-
-  delete[] list;
-  list = newList;
+  list[length++] = value;
 }
 
 /**
@@ -85,12 +73,8 @@ int IntegerList::popEnd() {
   int returnValue = list[--length];
   int *newList = new int[length];
 
-  for(int i=0; i<length; i++) {
-    newList[i] = list[i];
-  }
-
-  delete[] list;
-  list = newList;
+  copyArray(list, newList);
+  replaceList(newList);
 
   return returnValue;
 }
@@ -112,8 +96,16 @@ int IntegerList::getLength() {
 *    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
+  return list[element];
+}
 
-    return list[element];
+void IntegerList::copyArray(int* source, int* destination) {
+  for(int i = 0; i < length; i++) {
+    destination[i] = source[i];
+  }
+}
 
-
+void IntegerList::replaceList(int *newList) {
+  delete[] list;
+  list = newList;
 }
