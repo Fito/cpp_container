@@ -1,4 +1,4 @@
-/* In IntegerList.cpp
+/* IntegerList.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */

@@ -1,4 +1,4 @@
-/* In IntegerList.h
+/* IntegerList.h
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
