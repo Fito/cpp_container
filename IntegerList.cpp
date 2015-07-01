@@ -108,4 +108,5 @@ void IntegerList::copyArray(int* source, int* destination) {
 void IntegerList::replaceList(int *newList) {
   delete[] list;
   list = newList;
+  newList = nullptr;
 }
