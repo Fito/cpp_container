@@ -110,3 +110,17 @@ void IntegerList::replaceList(int *newList) {
   list = newList;
   newList = nullptr;
 }
+
+void IntegerList::sort () {
+
+    for (int outer_pass = 0; outer_pass < length; outer_pass++) {
+        for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
+
+            if (list[inner_pass] > list[inner_pass+1]) {
+                int tempStorage = list[inner_pass];
+                list[inner_pass] = list[inner_pass+1];
+                list[inner_pass+1] = tempStorage;
+            }
+        }
+    }
+}

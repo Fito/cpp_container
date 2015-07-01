@@ -27,6 +27,7 @@ public:
 	int popEnd();
 	int getLength();
 	int getElement(int element);
+	void sort();
 };
 
 #endif

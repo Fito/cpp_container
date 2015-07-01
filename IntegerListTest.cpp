@@ -4,6 +4,7 @@
 
 #include "IntegerList.h"
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 /**
@@ -14,6 +15,20 @@ int main(){
 
 	IntegerList list;
 
+	for (int i = 0; i < 15; i++) {
+		list.push(rand() % 101);
+	}
+
+	list.sort();
+
+	for (int i = 0; i < 15; i++) {
+		cout << list.getElement(i) << " ";
+	}
+
+	cout << endl;
+
+
+	/*
 	// list.push(10);
 	// cout << "length: " << list.getLength() << endl;
 	// list.push(20);
@@ -55,4 +70,6 @@ int main(){
 	for(int i = 0 ; i < list.getLength() ; i++){
 		cout << "list[" << i << "]: " << list.getElement(i) << endl;
 	}
+
+	*/
 }
