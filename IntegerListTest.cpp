@@ -21,7 +21,7 @@ int main(){
 	for(int i = 0 ; i < 5 ; i++) {
 		list.push(i*10);
 	}
-
+	cout << "done pushing" << endl;
 	for(int i = 0; i < list.getLength(); i++) {
 		cout << list.getElement(i) << endl;
 	}
@@ -55,4 +55,5 @@ int main(){
 	for(int i = 0 ; i < list.getLength() ; i++){
 		cout << "list[" << i << "]: " << list.getElement(i) << endl;
 	}
+
 }

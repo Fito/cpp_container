@@ -13,12 +13,13 @@
 #ifndef __INTEGERLIST__H__
 #define __INTEGERLIST__H__
 
+#include <vector>
+#include <iostream>
+
 class IntegerList{
 private:
-	int *list;
+	std::vector<int> *list;
 	int length;
-	void replaceList(int *newList);
-	void copyArray(int* source, int* destination);
 public:
 	IntegerList();
 	void push(int value);
