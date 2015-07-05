@@ -9,8 +9,7 @@
 
 /** Default constructor class. Takes no arguments. */
 IntegerList::IntegerList():
-    list(new std::vector<int> (0,0)),
-    length(0)
+    list(new std::vector<int> (0,0))
     {};
 
 /**
@@ -71,4 +70,25 @@ int IntegerList::getLength() {
 */
 int IntegerList::getElement(int element) {
   return list->at(element);
+}
+
+
+/**
+    Sorts elements of the list from lowest to highest.
+*/
+void IntegerList::sort() {
+
+    int current_length = list->size();
+
+    for (int outer_pass = 0; outer_pass < current_length; outer_pass++) {
+        for (int inner_pass = 0; inner_pass < current_length - outer_pass - 1; inner_pass++) {
+            if (list->at(inner_pass) > list->at(inner_pass + 1)) {
+
+                int _temp = list->at(inner_pass);               //store pos1 in temp
+                list->at(inner_pass) = list->at(inner_pass+1);  //assign pos2 to pos1
+                list->at(inner_pass+1) = _temp;                  //assign temp to pos2
+
+            }
+        }
+    }
 }

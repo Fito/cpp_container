@@ -19,7 +19,6 @@
 class IntegerList{
 private:
 	std::vector<int> *list;
-	int length;
 public:
 	IntegerList();
 	void push(int value);
@@ -28,6 +27,7 @@ public:
 	int popEnd();
 	int getLength();
 	int getElement(int element);
+	void sort();
 };
 
 #endif
