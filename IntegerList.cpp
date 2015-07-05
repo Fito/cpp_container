@@ -10,7 +10,7 @@
 
 /** Default constructor class. Takes no arguments. */
 IntegerList::IntegerList():
-  list(new int[0]),
+  list(nullptr),
   length(0)
   {};
 
@@ -20,6 +20,11 @@ IntegerList::IntegerList():
 *    \param value int An integer value to add to the top of the list.
 */
 void IntegerList::push(int value) {
+  if (!length) {
+    list = new int[++length];
+    list[0] = value;
+    return;
+  }
 
   int *newList = new int[++length];
 
@@ -35,6 +40,10 @@ void IntegerList::push(int value) {
 *   \returns int The top element of the list.
 */
 int IntegerList::pop() {
+  if (!length) {
+    std::cout << "Error: Could not pop. List is already empty. ";
+    return 0;
+  }
 
   int returnValue = list[0];
 
@@ -43,7 +52,10 @@ int IntegerList::pop() {
   copyArray(list + 1, newList);
   replaceList(newList);
 
-  length--;
+  if (!--length) {
+    delete[] list;
+    list = nullptr;
+  };
 
   return returnValue;
 }
@@ -54,6 +66,10 @@ int IntegerList::pop() {
 *   \param value int An integer value to add to the bottom of the list.
 */
 void IntegerList::pushEnd(int value) {
+  if (!length) {
+    push(value);
+    return;
+  }
 
   int *newList = new int[length + 1];
 
@@ -69,12 +85,21 @@ void IntegerList::pushEnd(int value) {
 *    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
+  if (!length) {
+    std::cout << "Error: Could not popEnd. List is already empty. ";
+    return 0;
+  }
 
   int returnValue = list[--length];
   int *newList = new int[length];
 
   copyArray(list, newList);
   replaceList(newList);
+
+  if (!length) {
+    delete[] list;
+    list = nullptr;
+  };
 
   return returnValue;
 }

@@ -43,7 +43,7 @@ int main(){
 
 	cout << "length: " << list.getLength() << endl;
 
-	for(int i = 0 ; i < 3 ; i++) {
+	for(int i = 0 ; i < 6 ; i++) {
 		cout << "poped: " << list.pop() << endl;
 	}
 
@@ -61,7 +61,7 @@ int main(){
 		cout << "list[" << i << "]: " << list.getElement(i) << endl;
 	}
 
-	for(int i = 0 ; i < 3 ; i++) {
+	for(int i = 0 ; i < 6 ; i++) {
 		list.popEnd();
 	}
 
