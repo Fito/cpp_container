@@ -10,8 +10,9 @@
 
 /** Default constructor class. Takes no arguments. */
 IntegerList::IntegerList():
-  list(nullptr),
-  length(0)
+    headNode(NULL),
+    endNode(NULL),
+    length(0)
   {};
 
 /**
@@ -20,18 +21,20 @@ IntegerList::IntegerList():
 *    \param value int An integer value to add to the top of the list.
 */
 void IntegerList::push(int value) {
-  if (!length) {
-    list = new int[++length];
-    list[0] = value;
-    return;
-  }
 
-  int *newList = new int[++length];
+    Node * assignToNextNode = headNode;
 
-  newList[0] = value;
+    headNode = new Node();
 
-  copyArray(list, newList + 1);
-  replaceList(newList);
+    headNode->value = value;
+    headNode->nextNode = assignToNextNode;
+
+    if (length == 0) {
+        endNode = headNode;
+    }
+
+    length++;
+
 }
 
 /**
@@ -40,24 +43,21 @@ void IntegerList::push(int value) {
 *   \returns int The top element of the list.
 */
 int IntegerList::pop() {
-  if (!length) {
-    std::cout << "Error: Could not pop. List is already empty. ";
-    return 0;
-  }
 
-  int returnValue = list[0];
+    int returnValue = headNode->value;
+    Node * assignToHeadNode = headNode->nextNode;
 
-  int *newList = new int[length];
+    delete headNode;
 
-  copyArray(list + 1, newList);
-  replaceList(newList);
+    headNode = assignToHeadNode;
 
-  if (!--length) {
-    delete[] list;
-    list = nullptr;
-  };
+    length--;
 
-  return returnValue;
+    if (length == 0) {
+        endNode = NULL;
+    }
+
+    return returnValue;
 }
 
 /**
@@ -66,17 +66,14 @@ int IntegerList::pop() {
 *   \param value int An integer value to add to the bottom of the list.
 */
 void IntegerList::pushEnd(int value) {
-  if (!length) {
-    push(value);
-    return;
-  }
 
-  int *newList = new int[length + 1];
+    endNode->nextNode = new Node();
+    endNode = endNode->nextNode;
+    endNode->value = value;
+    endNode->nextNode = NULL;
 
-  copyArray(list, newList);
-  replaceList(newList);
+    length++;
 
-  list[length++] = value;
 }
 
 /**
@@ -85,23 +82,27 @@ void IntegerList::pushEnd(int value) {
 *    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
-  if (!length) {
-    std::cout << "Error: Could not popEnd. List is already empty. ";
-    return 0;
-  }
 
-  int returnValue = list[--length];
-  int *newList = new int[length];
+    Node * previousNode = NULL;
+    Node * currentNode = headNode;
 
-  copyArray(list, newList);
-  replaceList(newList);
+    while (currentNode->nextNode != NULL) {
+        previousNode = currentNode;
+        currentNode = currentNode->nextNode;
+    }
 
-  if (!length) {
-    delete[] list;
-    list = nullptr;
-  };
+    int returnValue = currentNode->value;
 
-  return returnValue;
+    delete currentNode;
+
+    endNode = previousNode;
+
+    endNode->nextNode = NULL;
+
+    length--;
+
+    return returnValue;
+
 }
 
 /**
@@ -110,7 +111,7 @@ int IntegerList::popEnd() {
 *    \returns int The current length of the list.
 */
 int IntegerList::getLength() {
-  return length;
+    return length;
 }
 
 /**
@@ -121,31 +122,68 @@ int IntegerList::getLength() {
 *    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
-  return list[element];
+
+    Node * currentNode = headNode;
+
+    for(int i = element; i > 0; i--) {
+        currentNode = currentNode->nextNode;
+    }
+
+    return currentNode->value;
+
 }
 
-void IntegerList::copyArray(int* source, int* destination) {
-  for(int i = 0; i < length; i++) {
-    destination[i] = source[i];
-  }
-}
+void IntegerList::readOut() {
 
-void IntegerList::replaceList(int *newList) {
-  delete[] list;
-  list = newList;
-  newList = nullptr;
+    Node * currentNode = headNode;
+
+    while (currentNode != endNode) {
+        std::cout << currentNode->value << " ";
+        currentNode = currentNode->nextNode;
+    }
+
+    std::cout << currentNode->value << " ";
+
 }
 
 void IntegerList::sort () {
 
-    for (int outer_pass = 0; outer_pass < length; outer_pass++) {
-        for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
+        Node * pointsToLeftNode = NULL;
+        Node * leftNode = NULL;
+        Node * rightNode = NULL;
+        Node * rightNodePointsTo = NULL;
 
-            if (list[inner_pass] > list[inner_pass+1]) {
-                int tempStorage = list[inner_pass];
-                list[inner_pass] = list[inner_pass+1];
-                list[inner_pass+1] = tempStorage;
+        for (int outer_loop = 0; outer_loop < length - 1; outer_loop++) {
+
+            // Because headNode pointer is special, we treat it as a special case
+            if (headNode->value > headNode->nextNode->value) {
+
+                leftNode = headNode;
+                rightNode = headNode->nextNode;
+                rightNodePointsTo = rightNode->nextNode;
+
+                headNode = rightNode;
+                rightNode = leftNode;
+                leftNode = rightNodePointsTo;
+
             }
+
+            for (int inner_loop = 1; inner_loop < (length - outer_loop - 1); inner_loop++) {
+
+                pointsToLeftNode = leftNode;
+                leftNode = rightNode;
+                rightNode = rightNode->nextNode;
+                rightNodePointsTo = rightNode->nextNode;
+                //
+                // if (leftNode->value > rightNode->value) {
+                //
+                //     pointsToLeftNode = rightNode;
+                //     rightNode = leftNode;
+                //     leftNode = rightNodePointsTo;
+                //
+                // }
+            }
+
         }
-    }
+
 }

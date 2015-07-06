@@ -15,61 +15,16 @@ int main(){
 
 	IntegerList list;
 
-	for (int i = 0; i < 15; i++) {
-		list.push(rand() % 101);
-	}
+	list.push(5);
+	list.push(7);
+	list.push(9);
+	list.push(4);
+	list.push(1);
+	list.push(9);
+	list.push(2);
+
 
 	list.sort();
 
-	for (int i = 0; i < 15; i++) {
-		cout << list.getElement(i) << " ";
-	}
 
-	cout << endl;
-
-
-	/*
-	// list.push(10);
-	// cout << "length: " << list.getLength() << endl;
-	// list.push(20);
-	cout << "length: " << list.getLength() << endl;
-	for(int i = 0 ; i < 5 ; i++) {
-		list.push(i*10);
-	}
-
-	for(int i = 0; i < list.getLength(); i++) {
-		cout << list.getElement(i) << endl;
-	}
-
-	cout << "length: " << list.getLength() << endl;
-
-	for(int i = 0 ; i < 6 ; i++) {
-		cout << "poped: " << list.pop() << endl;
-	}
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	for(int i = 0 ; i < 5 ; i++) {
-		list.pushEnd(i*10);
-	}
-
-	cout << "After pushEnd" << endl;
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	for(int i = 0 ; i < 6 ; i++) {
-		list.popEnd();
-	}
-
-	cout << "After popEnd" << endl;
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	*/
 }
