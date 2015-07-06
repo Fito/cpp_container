@@ -15,13 +15,13 @@ int main(){
 
 	IntegerList list;
 
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < 12; i++) {
 		list.push(rand() % 101);
 	}
 
 	list.sort();
 
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < 12; i++) {
 		cout << list.getElement(i) << " ";
 	}
 

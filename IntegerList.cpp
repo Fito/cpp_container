@@ -138,7 +138,7 @@ void IntegerList::replaceList(int *newList) {
 
 void IntegerList::sort () {
 
-    for (int outer_pass = 0; outer_pass < length; outer_pass++) {
+    for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
         for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
 
             if (list[inner_pass] > list[inner_pass+1]) {
