@@ -137,53 +137,60 @@ void IntegerList::readOut() {
 
     Node * currentNode = headNode;
 
-    while (currentNode != endNode) {
+    for (int i = 0; i < length; i++) {
         std::cout << currentNode->value << " ";
         currentNode = currentNode->nextNode;
     }
-
-    std::cout << currentNode->value << " ";
 
 }
 
 void IntegerList::sort () {
 
-        Node * pointsToLeftNode = NULL;
-        Node * leftNode = NULL;
-        Node * rightNode = NULL;
-        Node * rightNodePointsTo = NULL;
+    Node * preNode = NULL;
+    Node * leftNode = NULL;
+    Node * rightNode = NULL;
 
-        for (int outer_loop = 0; outer_loop < length - 1; outer_loop++) {
+    for (int ol = 0; ol < length - 1; ol++)
+    {
 
-            // Because headNode pointer is special, we treat it as a special case
-            if (headNode->value > headNode->nextNode->value) {
+        if (headNode->value > headNode->nextNode->value)
+        {
+            preNode = NULL;
+            leftNode = headNode;
+            rightNode = headNode->nextNode;
 
-                leftNode = headNode;
-                rightNode = headNode->nextNode;
-                rightNodePointsTo = rightNode->nextNode;
-
-                headNode = rightNode;
-                rightNode = leftNode;
-                leftNode = rightNodePointsTo;
-
-            }
-
-            for (int inner_loop = 1; inner_loop < (length - outer_loop - 1); inner_loop++) {
-
-                pointsToLeftNode = leftNode;
-                leftNode = rightNode;
-                rightNode = rightNode->nextNode;
-                rightNodePointsTo = rightNode->nextNode;
-                //
-                // if (leftNode->value > rightNode->value) {
-                //
-                //     pointsToLeftNode = rightNode;
-                //     rightNode = leftNode;
-                //     leftNode = rightNodePointsTo;
-                //
-                // }
-            }
+            headNode = rightNode;
+            leftNode->nextNode = rightNode->nextNode;
+            rightNode->nextNode = leftNode;
 
         }
 
-}
+        preNode = headNode;
+        leftNode = headNode->nextNode;
+        rightNode = headNode->nextNode->nextNode;
+
+        for (int il = 0; il < length - ol - 2; il++)
+        {
+            if (leftNode->value > rightNode->value)
+            {
+                preNode->nextNode = rightNode;
+                leftNode->nextNode = rightNode->nextNode;
+                rightNode->nextNode = leftNode;
+
+                preNode = rightNode;
+                leftNode = leftNode;
+                rightNode = leftNode->nextNode;
+
+            } else {
+
+                preNode = leftNode;
+                leftNode = rightNode;
+                rightNode = leftNode->nextNode;
+
+            }
+        }
+
+    }
+
+
+}   // end sort

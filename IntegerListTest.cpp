@@ -15,16 +15,27 @@ int main(){
 
 	IntegerList list;
 
-	list.push(5);
 	list.push(7);
-	list.push(9);
-	list.push(4);
-	list.push(1);
-	list.push(9);
-	list.push(2);
+	list.push(12);
+	list.push(8);
+	list.push(13);
+	list.push(27);
+	list.push(165);
+	list.push(83);
+	list.push(17);
 
+	list.readOut();
+
+	cout << endl;
 
 	list.sort();
+
+	list.readOut();
+
+	cout << endl;
+
+
+
 
 
 }
