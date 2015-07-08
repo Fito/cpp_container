@@ -68,14 +68,12 @@ int IntegerList::count (int value) {
 
 
 int IntegerList::findElement (int value) {
-    // brook
 
     int counter = 0;
     Node * currentNode = headNode;
 
     while (currentNode != NULL)
     {
-
         if (currentNode->value == value)
         {
             return counter;
@@ -84,14 +82,40 @@ int IntegerList::findElement (int value) {
         currentNode = currentNode->next;
 
         counter++;
-
     }
 
     return -1;
-
 }
 
 void IntegerList::removeElement (int index) {
+
+    // We'll want to throw an exception here if index > length - 1
+
+    // Special case, 0th index
+    if (index == 0)
+    {
+        Node * nextNode = headNode->next;
+        delete headNode;
+        headNode = nextNode;
+        nextNode = NULL;
+        return;
+    }
+
+    // General case, Nth index
+    Node * nodeBeforeTargetNode = headNode;
+
+    while (index - 1 > 0)
+    {
+        nodeBeforeTargetNode = nodeBeforeTargetNode->next;
+        index--;
+    }
+
+    Node * nodeAfterTargetNode = nodeBeforeTargetNode->next->next;
+    delete nodeBeforeTargetNode->next;
+    nodeBeforeTargetNode->next = nodeAfterTargetNode;
+
+    nodeBeforeTargetNode = NULL;
+    nodeAfterTargetNode = NULL;
 
 }
 

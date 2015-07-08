@@ -20,10 +20,19 @@ int main(){
 	list.insert(4);
 	list.insert(2);
 	list.insert(5);
-	//list.insert(6);
+	list.insert(6);
 
 	list.readOut();
 
 	cout << "Instance of 4 at: " <<(list.findElement(4)) << endl;
+	cout << "Intance of 17 at: " <<(list.findElement(17)) << endl;
+
+	list.readOut();
+
+	list.removeElement(4);
+
+	cout << "Element at index 4 removed." << endl;
+
+	list.readOut();
 
 }
