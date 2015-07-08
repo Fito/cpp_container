@@ -57,19 +57,42 @@ void IntegerList::insert(int value) {
 }
 
 int IntegerList::get (int index) {
+    // fito
     return 0;
 }
 
 int IntegerList::count (int value) {
+    //fito
     return 0;
 }
 
 
 int IntegerList::findElement (int value) {
-    return 0;
+    // brook
+
+    int counter = 0;
+    Node * currentNode = headNode;
+
+    while (currentNode != NULL)
+    {
+
+        if (currentNode->value == value)
+        {
+            return counter;
+        }
+
+        currentNode = currentNode->next;
+
+        counter++;
+
+    }
+
+    return -1;
+
 }
 
 void IntegerList::removeElement (int index) {
+    // brook
 
 }
 
