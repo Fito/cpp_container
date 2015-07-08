@@ -14,46 +14,12 @@ int main(){
 
 	IntegerList list;
 
-	// list.push(10);
-	// cout << "length: " << list.getLength() << endl;
-	// list.push(20);
-	cout << "length: " << list.getLength() << endl;
-	for(int i = 0 ; i < 5 ; i++) {
-		list.push(i*10);
-	}
-	cout << "done pushing" << endl;
-	for(int i = 0; i < list.getLength(); i++) {
-		cout << list.getElement(i) << endl;
-	}
-
-	cout << "length: " << list.getLength() << endl;
-
-	for(int i = 0 ; i < 3 ; i++) {
-		cout << "poped: " << list.pop() << endl;
-	}
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	for(int i = 0 ; i < 5 ; i++) {
-		list.pushEnd(i*10);
-	}
-
-	cout << "After pushEnd" << endl;
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	for(int i = 0 ; i < 3 ; i++) {
-		list.popEnd();
-	}
-
-	cout << "After popEnd" << endl;
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
+	list.insert(10);
+	list.insert(9);
+	list.insert(7);
+	list.insert(4);
+	list.insert(2);
+	list.insert(5);
+	list.insert(6);
 
 }

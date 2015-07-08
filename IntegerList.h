@@ -13,21 +13,26 @@
 #ifndef __INTEGERLIST__H__
 #define __INTEGERLIST__H__
 
-#include <vector>
 #include <iostream>
 
-class IntegerList{
+class Node {
+	public:
+		Node (int value);
+		int value;
+		Node * next;
+};
+
+class IntegerList {
 private:
-	std::vector<int> *list;
+	Node * headNode;
+	int length;
 public:
-	IntegerList();
-	void push(int value);
-	int pop();
-	void pushEnd(int value);
-	int popEnd();
-	int getLength();
-	int getElement(int element);
-	void sort();
+	void insert(int value);
+	int get (int index);
+	int count (int value);
+	int findElement (int value);
+	void removeElement (int index);
+	void readOut ();
 };
 
 #endif
