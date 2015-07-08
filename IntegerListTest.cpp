@@ -22,4 +22,6 @@ int main(){
 	list.insert(5);
 	list.insert(6);
 
+	list.readOut();
+
 }

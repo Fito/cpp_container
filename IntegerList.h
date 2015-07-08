@@ -27,6 +27,7 @@ private:
 	Node * headNode;
 	int length;
 public:
+	IntegerList();
 	void insert(int value);
 	int get (int index);
 	int count (int value);

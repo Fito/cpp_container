@@ -12,7 +12,12 @@ Node::Node (int value):
     next(NULL)
     {};
 
-    void IntegerList::insert(int value) {
+IntegerList::IntegerList():
+        headNode(NULL),
+        length(0)
+        {};
+
+void IntegerList::insert(int value) {
 
         // List is empty and this will be the first entry
         if (length == 0) {
