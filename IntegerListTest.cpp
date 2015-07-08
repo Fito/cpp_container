@@ -17,6 +17,8 @@ int main(){
 	list.insert(10);
 	list.insert(9);
 	list.insert(7);
+	list.insert(7);
+	list.insert(7);
 	list.insert(4);
 	list.insert(2);
 	list.insert(5);
@@ -35,4 +37,14 @@ int main(){
 
 	list.readOut();
 
+	cout << "Instance of 4 at: " << (list.findElement(4)) << endl;
+
+	cout << "Value at 0 is: " << list.get(0) << endl;
+	cout << "Value at 3 is: " << list.get(3) << endl;
+	cout << "Value at 11 is out of bounds and prints an alert: " << list.get(11) << endl;
+	cout << "Value at -5 is out of bounds and prints an alert: " << list.get(-5) << endl;
+	cout << "Value 2 is present " << list.count(2) << " times" << endl;
+	cout << "Value 7 is present " << list.count(7) << " times" << endl;
+	cout << "Value 10 is present " << list.count(10) << " times" << endl;
+	cout << "Value 13 is present " << list.count(13) << " times" << endl;
 }

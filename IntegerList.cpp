@@ -7,6 +7,10 @@
 
 #include "IntegerList.h"
 
+void alert(const std::string& message) {
+  std::cout << message << std::endl;
+}
+
 Node::Node (int value):
     value(value),
     next(NULL)
@@ -56,14 +60,34 @@ void IntegerList::insert(int value) {
 
 }
 
-int IntegerList::get (int index) {
-    // fito
-    return 0;
+int IntegerList::get (int index)
+{
+    if ( index >= length || index < 0 )
+    {
+      alert("Index out of bounds for list.");
+      return 0;
+    }
+
+    Node *currentNode = headNode;
+    for ( int i = 0; (i < index) && currentNode->next != NULL; i++ )
+    {
+      currentNode = currentNode->next;
+    }
+
+    return currentNode->value;
 }
 
 int IntegerList::count (int value) {
-    //fito
-    return 0;
+    Node *currentNode = headNode;
+    int counter = 0;
+
+    while( currentNode )
+    {
+      if ( currentNode->value == value ) { counter++; }
+      currentNode = currentNode->next;
+    }
+
+    return counter;
 }
 
 
