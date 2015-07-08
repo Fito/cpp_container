@@ -43,16 +43,16 @@ void IntegerList::insert(int value) {
         Node * currentNode = headNode;
 
         while (currentNode->next->value < value && currentNode->next != NULL) {
-
-            Node * nodeToInsert = new Node(value);
-            nodeToInsert->next = currentNode->next;
-            currentNode->next = nodeToInsert;
-
-            nodeToInsert = NULL;
-            length++;
-            return;
-
+            currentNode = currentNode->next;
         }
+
+        Node * nodeToInsert = new Node(value);
+        nodeToInsert->next = currentNode->next;
+        currentNode->next = nodeToInsert;
+
+        nodeToInsert = NULL;
+        length++;
+        return;
 
 }
 
@@ -92,7 +92,6 @@ int IntegerList::findElement (int value) {
 }
 
 void IntegerList::removeElement (int index) {
-    // brook
 
 }
 

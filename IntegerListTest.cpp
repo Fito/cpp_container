@@ -20,8 +20,10 @@ int main(){
 	list.insert(4);
 	list.insert(2);
 	list.insert(5);
-	list.insert(6);
+	//list.insert(6);
 
 	list.readOut();
+
+	cout << "Instance of 4 at: " <<(list.findElement(4)) << endl;
 
 }
