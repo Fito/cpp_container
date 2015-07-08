@@ -7,10 +7,6 @@
 
 #include "IntegerList.h"
 
-void alert(const std::string& message) {
-  std::cout << message << std::endl;
-}
-
 Node::Node (int value):
     value(value),
     next(NULL)
@@ -64,7 +60,7 @@ int IntegerList::get (int index)
 {
     if ( index >= length || index < 0 )
     {
-      alert("Index out of bounds for list.");
+      std::cout << "Index out of bounds for list." << std::endl;
       return 0;
     }
 
