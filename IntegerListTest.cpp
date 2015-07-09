@@ -12,8 +12,8 @@ using namespace std;
  * is populated and the values printed out to the console.
  */
 int main(){
-
-	IntegerList list;
+	IntegerList *list;
+	int x = 0;
 
 	for (int i = 0; i < 12; i++) {
 		list.push(rand() % 101);

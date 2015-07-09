@@ -17,6 +17,7 @@ class IntegerList{
 private:
 	int *list;
 	int length;
+	void resize(int newSize);
 	void replaceList(int *newList);
 	void copyArray(int* source, int* destination);
 public:

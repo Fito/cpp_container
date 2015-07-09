@@ -6,6 +6,7 @@
 /** \file IntegerList.cpp */
 
 #include <iostream>
+#include <exception>
 #include "IntegerList.h"
 
 /** Default constructor class. Takes no arguments. */
@@ -19,19 +20,43 @@ IntegerList::IntegerList():
 *
 *    \param value int An integer value to add to the top of the list.
 */
-void IntegerList::push(int value) {
-  if (!length) {
-    list = new int[++length];
+void IntegerList::push(int value)
+{
+    try
+    {
+        list = new int[++size];
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Error initializing array. Message: " << e.what() << std::endl;
+    }
+    catch (...)
+    {
+        std::cerr << "Uknown error occured while initializing array." << std::endl;
+    }
+
     list[0] = value;
     return;
-  }
 
-  int *newList = new int[++length];
 
-  newList[0] = value;
+    try
+    {
+        int *newList = new int[++length];
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Error allocating additional space to array. Message: " << e.what() << std::endl;
+    }
+    catch (...)
+    {
+        std::cerr << "Uknown error occured while allocating additional space to array." << std::endl;
+    }
 
-  copyArray(list, newList + 1);
-  replaceList(newList);
+    newList[0] = value;
+
+    copyArray(list, newList + 1);
+    replaceList(newList);
+
 }
 
 /**
