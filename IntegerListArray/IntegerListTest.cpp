@@ -11,65 +11,34 @@ using namespace std;
  * This main method tests the IntegerList method.  An IntegerList
  * is populated and the values printed out to the console.
  */
-int main(){
-	IntegerList *list;
-	int x = 0;
+int main()
+{
 
-	for (int i = 0; i < 12; i++) {
-		list.push(rand() % 101);
-	}
+	IntegerList list;
 
-	list.sort();
+	list.push(5);
+	list.push(7);
+	list.push(3);
 
-	for (int i = 0; i < 12; i++) {
+	list.pop();
+	list.pop();
+
+	list.pushEnd(5);
+	list.pushEnd(3);
+
+	list.push(9);
+	list.push(2);
+
+	list.popEnd();
+	list.popEnd();
+
+	for (int i = 0; i < list.getLength(); i++)
+	{
 		cout << list.getElement(i) << " ";
 	}
 
 	cout << endl;
 
 
-	/*
-	// list.push(10);
-	// cout << "length: " << list.getLength() << endl;
-	// list.push(20);
-	cout << "length: " << list.getLength() << endl;
-	for(int i = 0 ; i < 5 ; i++) {
-		list.push(i*10);
-	}
 
-	for(int i = 0; i < list.getLength(); i++) {
-		cout << list.getElement(i) << endl;
-	}
-
-	cout << "length: " << list.getLength() << endl;
-
-	for(int i = 0 ; i < 6 ; i++) {
-		cout << "poped: " << list.pop() << endl;
-	}
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	for(int i = 0 ; i < 5 ; i++) {
-		list.pushEnd(i*10);
-	}
-
-	cout << "After pushEnd" << endl;
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	for(int i = 0 ; i < 6 ; i++) {
-		list.popEnd();
-	}
-
-	cout << "After popEnd" << endl;
-
-	for(int i = 0 ; i < list.getLength() ; i++){
-		cout << "list[" << i << "]: " << list.getElement(i) << endl;
-	}
-
-	*/
 }

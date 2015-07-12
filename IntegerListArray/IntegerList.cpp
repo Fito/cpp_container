@@ -22,34 +22,43 @@ IntegerList::IntegerList():
 */
 void IntegerList::push(int value)
 {
+    if (length == 0)
+    {
+        try
+        {
+            list = new int[++length];
+        }
+        catch (std::bad_alloc& e)
+        {
+            std::cerr << "Bad Allocation Exception: " << e.what() << std::endl;
+            return;
+        }
+        catch (...)
+        {
+            std::cerr << "An unknown error occured while allocating memory to array." << std::endl;
+            return;
+        }
+
+        list[0] = value;
+        return;
+    }
+
+    // Otherwise...
+    int *newList;
+
     try
     {
-        list = new int[++size];
+        newList = new int[++length];
     }
     catch (std::bad_alloc& e)
     {
-        std::cerr << "Error initializing array. Message: " << e.what() << std::endl;
+        std::cerr << "Bad Allocation Exception: " << e.what() << std::endl;
+        return;
     }
     catch (...)
     {
-        std::cerr << "Uknown error occured while initializing array." << std::endl;
-    }
-
-    list[0] = value;
-    return;
-
-
-    try
-    {
-        int *newList = new int[++length];
-    }
-    catch (std::bad_alloc& e)
-    {
-        std::cerr << "Error allocating additional space to array. Message: " << e.what() << std::endl;
-    }
-    catch (...)
-    {
-        std::cerr << "Uknown error occured while allocating additional space to array." << std::endl;
+        std::cerr << "An unknown error occured while allocating memory to the array." << std::endl;
+        return;
     }
 
     newList[0] = value;
@@ -64,25 +73,41 @@ void IntegerList::push(int value)
 *
 *   \returns int The top element of the list.
 */
-int IntegerList::pop() {
-  if (!length) {
-    std::cout << "Error: Could not pop. List is already empty. ";
-    return 0;
-  }
+int IntegerList::pop()
+{
+    try
+    {
+        if (length == 0)
+        {
+            throw std::out_of_range("The array is currently empty.");
+        }
+    }
+    catch (std::out_of_range& e)
+    {
+        std::cerr << "Range Error: " << e.what() << std::endl;
+        return 0;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown error occured while popping from the list." << std::endl;
+        return 0;
+    }
 
-  int returnValue = list[0];
+    int returnValue = list[0];
 
-  int *newList = new int[length];
+    int *newList = new int[length];
 
-  copyArray(list + 1, newList);
-  replaceList(newList);
+    copyArray(list + 1, newList);
+    replaceList(newList);
 
-  if (!--length) {
-    delete[] list;
-    list = nullptr;
-  };
+    if (--length == 0)
+    {
+        delete[] list;
+        list = NULL;
+    }
 
-  return returnValue;
+    return returnValue;
+
 }
 
 /**
@@ -90,18 +115,35 @@ int IntegerList::pop() {
 *
 *   \param value int An integer value to add to the bottom of the list.
 */
-void IntegerList::pushEnd(int value) {
-  if (!length) {
-    push(value);
-    return;
-  }
+void IntegerList::pushEnd(int value)
+{
+    if (!length)
+    {
+        push(value);    // push method already has exception handling
+        return;
+    }
 
-  int *newList = new int[length + 1];
+    int *newList;
 
-  copyArray(list, newList);
-  replaceList(newList);
+    try
+    {
+        newList = new int[length + 1];
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Bad Allocation Error: " << e.what() << std::endl;
+        return;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown error occured while allocating memory to the array." << std::endl;
+        return;
+    }
 
-  list[length++] = value;
+    copyArray(list, newList);
+    replaceList(newList);
+
+    list[length++] = value;
 }
 
 /**
@@ -110,21 +152,50 @@ void IntegerList::pushEnd(int value) {
 *    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
-  if (!length) {
-    std::cout << "Error: Could not popEnd. List is already empty. ";
-    return 0;
-  }
 
-  int returnValue = list[--length];
-  int *newList = new int[length];
+    try
+    {
+        if (length == 0)
+        {
+            throw std::out_of_range("The array is currently empty.");
+        }
+    }
+    catch (std::out_of_range& e)
+    {
+        std::cerr << "Range Error: " << e.what() << std::endl;
+        return 0;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown error occured while popping from the list." << std::endl;
+        return 0;
+    }
 
-  copyArray(list, newList);
-  replaceList(newList);
+    int returnValue = list[--length];
 
-  if (!length) {
-    delete[] list;
-    list = nullptr;
-  };
+    int *newList;
+
+    try
+    {
+        newList = new int[length];
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Bad Allocation Error: " << e.what() << std::endl;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown error occured while allocating space for an array." << std::endl;
+    }
+
+    copyArray(list, newList);
+    replaceList(newList);
+
+    if (length == 0)
+    {
+        delete[] list;
+        list = nullptr;
+    }
 
   return returnValue;
 }

@@ -13,22 +13,23 @@
 #ifndef __INTEGERLIST__H__
 #define __INTEGERLIST__H__
 
-class IntegerList{
-private:
-	int *list;
-	int length;
-	void resize(int newSize);
-	void replaceList(int *newList);
-	void copyArray(int* source, int* destination);
-public:
-	IntegerList();
-	void push(int value);
-	int pop();
-	void pushEnd(int value);
-	int popEnd();
-	int getLength();
-	int getElement(int element);
-	void sort();
+class IntegerList
+{
+	private:
+		int *list;
+		int length;
+		void resize(int newSize);
+		void replaceList(int *newList);
+		void copyArray(int* source, int* destination);
+	public:
+		IntegerList();
+		void push(int value);
+		int pop();
+		void pushEnd(int value);
+		int popEnd();
+		int getLength();
+		int getElement(int element);
+		void sort();
 };
 
 #endif
