@@ -1,1 +1,6 @@
 a.out
+*.o
+*.h.gch
+.DS_Store
+/doxygen
+/html
