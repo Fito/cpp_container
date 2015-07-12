@@ -24,7 +24,7 @@ IntegerList::~IntegerList() {
 *    \param value int An integer value to add to the top of the list.
 */
 void IntegerList::push(int value) {
-    if ( length == 0 )
+    if ( list == NULL )
     {
       try
       {
@@ -36,7 +36,7 @@ void IntegerList::push(int value) {
       }
       catch( ... )
       {
-        std::cerr << "Unknown error: " << e.what() << "\n";
+        std::cerr << "Unknown error." << "\n";
       }
     }
 
@@ -49,7 +49,16 @@ void IntegerList::push(int value) {
 *   \returns int The top element of the list.
 */
 int IntegerList::pop() {
-    int returnValue = list->front();
+    int returnValue = 0;
+
+    if ( getLength() == 0 )
+    {
+      std::cout << "List is empty, cannot pop." << std::endl;
+      return returnValue;
+    }
+
+    returnValue = list->front();
+
     list->erase(list->begin());
     return returnValue;
 }
@@ -60,6 +69,22 @@ int IntegerList::pop() {
 *   \param value int An integer value to add to the bottom of the list.
 */
 void IntegerList::pushEnd(int value) {
+    if ( list == NULL )
+    {
+      try
+      {
+        list = new std::vector<int>(0,0);
+      }
+      catch( std::bad_alloc& e )
+      {
+        std::cerr << "Error while trying to instantiate vector: " << e.what() << "\n";
+      }
+      catch( ... )
+      {
+        std::cerr << "Unknown error." << "\n";
+      }
+    }
+
     list->push_back(value);
 }
 
@@ -69,6 +94,11 @@ void IntegerList::pushEnd(int value) {
 *    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
+    if (list == NULL)
+    {
+      std::cout << "List is empty, cannot popEnd." << std::endl;
+      return 0;
+    }
     int returnValue = list->back();
     list->pop_back();
     return returnValue;
@@ -80,6 +110,7 @@ int IntegerList::popEnd() {
 *    \returns int The current length of the list.
 */
 int IntegerList::getLength() {
+  if (list == NULL) { return 0; }
   return list->size();
 }
 
@@ -91,7 +122,20 @@ int IntegerList::getLength() {
 *    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
-  return list->at(element);
+  int returnValue = 0;
+  try
+  {
+    returnValue = list->at(element);
+  }
+  catch( std::out_of_range& e )
+  {
+    std::cerr << "Error while trying to get element: " << e.what() << "\n";
+  }
+  catch( ... )
+  {
+    std::cerr << "Unknown error." << "\n";
+  }
+  return returnValue;
 }
 
 
