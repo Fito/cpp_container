@@ -6,11 +6,17 @@
 /** \file IntegerList.cpp */
 
 #include "IntegerList.h"
+#include <exception>
 
-/** Default constructor class. Takes no arguments. */
+/** Default class constructor. Takes no arguments. */
 IntegerList::IntegerList():
-    list(new std::vector<int> (0,0))
+    list(NULL)
     {};
+
+/** Default class destructor. Takes no arguments. */
+IntegerList::~IntegerList() {
+    delete list;
+}
 
 /**
 *   Adds a new value to the top of the list.
@@ -18,6 +24,22 @@ IntegerList::IntegerList():
 *    \param value int An integer value to add to the top of the list.
 */
 void IntegerList::push(int value) {
+    if ( length == 0 )
+    {
+      try
+      {
+        list = new std::vector<int>(0,0);
+      }
+      catch( std::bad_alloc& e )
+      {
+        std::cerr << "Error while trying to instantiate vector: " << e.what() << "\n";
+      }
+      catch( ... )
+      {
+        std::cerr << "Unknown error: " << e.what() << "\n";
+      }
+    }
+
     list->insert(list->begin(), value);
 }
 

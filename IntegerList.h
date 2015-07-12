@@ -21,6 +21,7 @@ private:
 	std::vector<int> *list;
 public:
 	IntegerList();
+	~IntegerList();
 	void push(int value);
 	int pop();
 	void pushEnd(int value);
