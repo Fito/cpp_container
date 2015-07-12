@@ -18,10 +18,16 @@ int main(){
 	// cout << "length: " << list.getLength() << endl;
 	// list.push(20);
 	cout << "length: " << list.getLength() << endl;
+
+	list.push(10);
+	list.pop();
+	list.pop();
+
 	for(int i = 0 ; i < 5 ; i++) {
 		list.push(i*10);
 	}
 	cout << "done pushing" << endl;
+
 	for(int i = 0; i < list.getLength(); i++) {
 		cout << list.getElement(i) << endl;
 	}
@@ -56,4 +62,5 @@ int main(){
 		cout << "list[" << i << "]: " << list.getElement(i) << endl;
 	}
 
+	list.getElement(5);
 }

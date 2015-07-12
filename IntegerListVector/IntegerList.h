@@ -19,6 +19,7 @@
 class IntegerList{
 private:
 	std::vector<int> *list;
+	void checkListLength();
 public:
 	IntegerList();
 	~IntegerList();
