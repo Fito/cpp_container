@@ -49,14 +49,22 @@ void IntegerList::push(int value) {
 *   \returns int The top element of the list.
 */
 int IntegerList::pop() {
-    int returnValue = 0;
-
-    if ( getLength() == 0 )
+    try
     {
-      std::cout << "List is empty, cannot pop." << std::endl;
-      return returnValue;
+        checkListLength();
+    }
+    catch( std::length_error& e )
+    {
+        std::cerr << "Error while trying to pop: " << e.what() << "\n";
+        return 0;
+    }
+    catch( ... )
+    {
+        std::cerr << "Unknown error." << "\n";
+        return 0;
     }
 
+    int returnValue = 0;
     returnValue = list->front();
 
     list->erase(list->begin());
@@ -73,15 +81,15 @@ void IntegerList::pushEnd(int value) {
     {
       try
       {
-        list = new std::vector<int>(0,0);
+          list = new std::vector<int>(0,0);
       }
       catch( std::bad_alloc& e )
       {
-        std::cerr << "Error while trying to instantiate vector: " << e.what() << "\n";
+          std::cerr << "Error while trying to instantiate vector: " << e.what() << "\n";
       }
       catch( ... )
       {
-        std::cerr << "Unknown error." << "\n";
+          std::cerr << "Unknown error." << "\n";
       }
     }
 
@@ -94,11 +102,21 @@ void IntegerList::pushEnd(int value) {
 *    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
-    if (list == NULL)
+    try
     {
-      std::cout << "List is empty, cannot popEnd." << std::endl;
-      return 0;
+        checkListLength();
     }
+    catch( std::length_error& e )
+    {
+        std::cerr << "Error while trying to popEnd: " << e.what() << "\n";
+        return 0;
+    }
+    catch( ... )
+    {
+        std::cerr << "Unknown error." << "\n";
+        return 0;
+    }
+
     int returnValue = list->back();
     list->pop_back();
     return returnValue;
@@ -110,8 +128,22 @@ int IntegerList::popEnd() {
 *    \returns int The current length of the list.
 */
 int IntegerList::getLength() {
-  if (list == NULL) { return 0; }
-  return list->size();
+    try
+    {
+      checkListLength();
+    }
+    catch( std::length_error& e )
+    {
+      std::cerr << "Error while trying to get length: " << e.what() << "\n";
+      return 0;
+    }
+    catch( ... )
+    {
+      std::cerr << "Unknown error." << "\n";
+      return 0;
+    }
+
+    return list->size();
 }
 
 /**
@@ -156,5 +188,12 @@ void IntegerList::sort() {
 
             }
         }
+    }
+}
+
+void IntegerList::checkListLength() {
+    if (list == NULL || list->size() == 0)
+    {
+      throw std::length_error("List is empty");
     }
 }
