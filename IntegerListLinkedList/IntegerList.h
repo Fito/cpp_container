@@ -13,13 +13,17 @@
 #ifndef __INTEGERLIST__H__
 #define __INTEGERLIST__H__
 
-class IntegerList{
+class Node {
+	public:
+		int value;
+		Node *nextNode;
+};
+
+class IntegerList {
 private:
-	int *list;
+	Node *headNode;
+	Node *endNode;
 	int length;
-	void resize(int newSize);
-	void replaceList(int *newList);
-	void copyArray(int* source, int* destination);
 public:
 	IntegerList();
 	void push(int value);
@@ -28,6 +32,7 @@ public:
 	int popEnd();
 	int getLength();
 	int getElement(int element);
+	void readOut();
 	void sort();
 };
 
