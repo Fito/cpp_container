@@ -128,22 +128,14 @@ int IntegerList::popEnd() {
 *    \returns int The current length of the list.
 */
 int IntegerList::getLength() {
-    try
+    if ( list && list->size() )
     {
-      checkListLength();
+        return list->size();
     }
-    catch( std::length_error& e )
+    else
     {
-      std::cerr << "Error while trying to get length: " << e.what() << "\n";
-      return 0;
+        return 0;
     }
-    catch( ... )
-    {
-      std::cerr << "Unknown error." << "\n";
-      return 0;
-    }
-
-    return list->size();
 }
 
 /**
@@ -154,20 +146,20 @@ int IntegerList::getLength() {
 *    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
-  int returnValue = 0;
-  try
-  {
-    returnValue = list->at(element);
-  }
-  catch( std::out_of_range& e )
-  {
-    std::cerr << "Error while trying to get element: " << e.what() << "\n";
-  }
-  catch( ... )
-  {
-    std::cerr << "Unknown error." << "\n";
-  }
-  return returnValue;
+    int returnValue = 0;
+    try
+    {
+        returnValue = list->at(element);
+    }
+    catch( std::out_of_range& e )
+    {
+        std::cerr << "Error while trying to get element: " << e.what() << "\n";
+    }
+    catch( ... )
+    {
+        std::cerr << "Unknown error." << "\n";
+    }
+    return returnValue;
 }
 
 

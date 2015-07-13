@@ -13,7 +13,18 @@ IntegerList::IntegerList():
     headNode(NULL),
     endNode(NULL),
     length(0)
-  {};
+    {};
+
+/** Default class destructor. Takes no arguments. */
+IntegerList::~IntegerList() {
+    Node * currentNode = headNode;
+
+    while ( currentNode ) {
+        Node * nextNode = currentNode->nextNode;
+        delete currentNode;
+        currentNode = nextNode;
+    }
+}
 
 /**
 *   Adds a new value to the top of the list.
@@ -24,7 +35,18 @@ void IntegerList::push(int value) {
 
     Node * assignToNextNode = headNode;
 
-    headNode = new Node();
+    try
+    {
+        headNode = new Node();
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Error initializing Node: " << e.what() << "\n";
+    }
+    catch (...)
+    {
+        std::cerr << "Uknown error." << "\n";
+    }
 
     headNode->value = value;
     headNode->nextNode = assignToNextNode;
@@ -43,6 +65,20 @@ void IntegerList::push(int value) {
 *   \returns int The top element of the list.
 */
 int IntegerList::pop() {
+    try
+    {
+        checkListLength();
+    }
+    catch( std::length_error& e )
+    {
+        std::cerr << "Error while trying to pop: " << e.what() << "\n";
+        return 0;
+    }
+    catch( ... )
+    {
+        std::cerr << "Unknown error." << "\n";
+        return 0;
+    }
 
     int returnValue = headNode->value;
     Node * assignToHeadNode = headNode->nextNode;
@@ -66,8 +102,21 @@ int IntegerList::pop() {
 *   \param value int An integer value to add to the bottom of the list.
 */
 void IntegerList::pushEnd(int value) {
+    try
+    {
+        endNode->nextNode = new Node();
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Error initializing Node: " << e.what() << "\n";
+        return;
+    }
+    catch (...)
+    {
+        std::cerr << "Uknown error." << "\n";
+        return;
+    }
 
-    endNode->nextNode = new Node();
     endNode = endNode->nextNode;
     endNode->value = value;
     endNode->nextNode = NULL;
@@ -82,6 +131,20 @@ void IntegerList::pushEnd(int value) {
 *    \returns int The bottom element of the list.
 */
 int IntegerList::popEnd() {
+    try
+    {
+        checkListLength();
+    }
+    catch( std::length_error& e )
+    {
+        std::cerr << "Error while trying to popEnd: " << e.what() << "\n";
+        return 0;
+    }
+    catch( ... )
+    {
+        std::cerr << "Unknown error." << "\n";
+        return 0;
+    }
 
     Node * previousNode = NULL;
     Node * currentNode = headNode;
@@ -122,6 +185,20 @@ int IntegerList::getLength() {
 *    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
+    try
+    {
+        checkListBounds(element);
+    }
+    catch( std::out_of_range& e )
+    {
+        std::cerr << "Error while trying to get element: " << e.what() << "\n";
+        return 0;
+    }
+    catch( ... )
+    {
+        std::cerr << "Unknown error." << "\n";
+        return 0;
+    }
 
     Node * currentNode = headNode;
 
@@ -194,3 +271,19 @@ void IntegerList::sort () {
 
 
 }   // end sort
+
+void IntegerList::checkListBounds(int index)
+{
+    if ( index < 0 || index > length )
+    {
+      throw std::out_of_range("Element is out of bounds");
+    }
+}
+
+void IntegerList::checkListLength()
+{
+    if (headNode == NULL || length == 0)
+    {
+      throw std::length_error("List is empty");
+    }
+}
