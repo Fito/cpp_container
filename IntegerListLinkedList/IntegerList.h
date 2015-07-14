@@ -24,8 +24,11 @@ private:
 	Node *headNode;
 	Node *endNode;
 	int length;
+	void checkListLength();
+	void checkListBounds(int index);
 public:
 	IntegerList();
+	~IntegerList();
 	void push(int value);
 	int pop();
 	void pushEnd(int value);
