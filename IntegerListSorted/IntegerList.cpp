@@ -4,12 +4,8 @@
  */
 
 /** \file IntegerList.cpp */
-
+#include <exception>
 #include "IntegerList.h"
-
-void alert(const std::string& message) {
-  std::cout << message << std::endl;
-}
 
 Node::Node (int value):
     value(value),
@@ -21,37 +17,64 @@ IntegerList::IntegerList():
         length(0)
         {};
 
-IntegerList::~IntegerList() {
-    
+IntegerList::~IntegerList()
+{
     Node * currentNode = headNode;
 
-    while ( currentNode ) {
+    while (currentNode)
+    {
         Node * nextNode = currentNode->next;
         delete currentNode;
         currentNode = nextNode;
     }
 }
 
-void IntegerList::insert(int value) {
-
+void IntegerList::insert(int value)
+{
         // List is empty and this will be the first entry
-        if (length == 0) {
+        if (length == 0)
+        {
+            try
+            {
+                headNode = new Node(value);
+            }
+            catch (std::bad_alloc& e)
+            {
+                std::cerr << "Bad Allocation Exception: " << e.what() << "\n";
+                return;
+            }
+            catch (...)
+            {
+                std::cerr << "Unknown exception while allocating memory." << "\n";
+                return;
+            }
 
-            headNode = new Node(value);
             length++;
             return;
         }
 
         // Entry will be the first node
-        if (headNode->value >= value) {
-
+        if (headNode->value >= value)
+        {
             Node * oldHeadNode = headNode;
-            headNode = new Node(value);
+
+            try
+            {
+                headNode = new Node(value);
+            }
+            catch (std::bad_alloc& e)
+            {
+                std::cerr << "Bad Allocation Exception: " << "\n";
+                return;
+            }
+            catch (...)
+            {
+                std::cerr << "Unknown exception occured while allocating memory." << "\n";
+                return;
+            }
+
             headNode->next = oldHeadNode;
 
-            oldHeadNode = NULL;
-            length++;
-            return;
         }
 
         // Entry will be subsequent node
@@ -61,7 +84,23 @@ void IntegerList::insert(int value) {
             currentNode = currentNode->next;
         }
 
-        Node * nodeToInsert = new Node(value);
+        Node * nodeToInsert;
+
+        try
+        {
+            nodeToInsert = new Node(value);
+        }
+        catch (std::bad_alloc& e)
+        {
+            std::cerr << "Bad Allocation Exception: " << "\n";
+            return;
+        }
+        catch (...)
+        {
+            std::cerr << "An unknown error occured while allocating memory." << "\n";
+            return;
+        }
+
         nodeToInsert->next = currentNode->next;
         currentNode->next = nodeToInsert;
 
@@ -73,10 +112,20 @@ void IntegerList::insert(int value) {
 
 int IntegerList::get (int index)
 {
-    if ( index >= length || index < 0 )
+    try
     {
-      alert("Index out of bounds for list.");
-      return 0;
+        if ( index >= length || index < 0 )
+        {
+            throw std::out_of_range("Invalid index value provided.");
+        }
+    }
+    catch (std::out_of_range& e)
+    {
+        std::cerr << "Out of Range Exception: " << e.what() << "\n";
+    }
+    catch (...)
+    {
+        std::cerr << "Unknown exception why retriving index value." << "\n";
     }
 
     Node *currentNode = headNode;
