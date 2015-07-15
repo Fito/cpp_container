@@ -247,10 +247,12 @@ int IntegerArrayList::getElement(int element) {
     catch (std::out_of_range& e)
     {
         std::cerr << "Out of Range Exception: " << e.what() << std::endl;
+        return;
     }
     catch (...)
     {
         std::cerr << "Unknown exception while fetching index value." << std::endl;
+        return;
     }
 
     // valid index location, proceed...
