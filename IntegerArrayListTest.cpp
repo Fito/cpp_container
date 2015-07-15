@@ -1,20 +1,20 @@
-/*  IntegerList.cpp
+/*  IntegerArrayList.cpp
  *  6/25/15 by MHS
  */
 
-#include "IntegerList.h"
+#include "IntegerArrayList.h"
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
 
 /**
- * This main method tests the IntegerList method.  An IntegerList
+ * This main method tests the IntegerArrayList method.  An IntegerArrayList
  * is populated and the values printed out to the console.
  */
 int main()
 {
 
-	IntegerList list;
+	IntegerArrayList list;
 
 	list.push(5);
 	list.push(7);

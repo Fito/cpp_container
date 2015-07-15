@@ -1,16 +1,16 @@
-/* IntegerList.cpp
+/* IntegerArrayList.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file IntegerList.cpp */
+/** \file IntegerArrayList.cpp */
 
 #include <iostream>
 #include <exception>
-#include "IntegerList.h"
+#include "IntegerArrayList.h"
 
 /** Default constructor class. Takes no arguments. */
-IntegerList::IntegerList():
+IntegerArrayList::IntegerArrayList():
   list(nullptr),
   length(0)
   {};
@@ -20,7 +20,7 @@ IntegerList::IntegerList():
 *
 *    \param value int An integer value to add to the front of the list.
 */
-void IntegerList::push(int value)
+void IntegerArrayList::push(int value)
 {
     // If the list is currently empty...
     if (length == 0)
@@ -75,7 +75,7 @@ void IntegerList::push(int value)
 *
 *   \returns int The front element of the list.
 */
-int IntegerList::pop()
+int IntegerArrayList::pop()
 {
     try
     {
@@ -106,12 +106,12 @@ int IntegerList::pop()
     catch (std::bad_alloc& e)
     {
         std::cerr << "Bad Allocation Exception: " << e.what() << std::endl;
-        return;
+        return 0;
     }
     catch (...)
     {
         std::cerr << "An unknown exception occured while allocating memory for an array." << std::endl;
-        return;
+        return 0;
     }
 
     copyArray(list + 1, newList);
@@ -133,7 +133,7 @@ int IntegerList::pop()
 *
 *   \param value int An integer value to add to the end of the list.
 */
-void IntegerList::pushEnd(int value)
+void IntegerArrayList::pushEnd(int value)
 {
     if (!length)
     {
@@ -170,7 +170,7 @@ void IntegerList::pushEnd(int value)
 *
 *    \returns int The back element of the list.
 */
-int IntegerList::popEnd() {
+int IntegerArrayList::popEnd() {
 
     try
     {
@@ -225,7 +225,7 @@ int IntegerList::popEnd() {
 *
 *    \returns int The current length of the list.
 */
-int IntegerList::getLength() {
+int IntegerArrayList::getLength() {
   return length;
 }
 
@@ -236,13 +236,12 @@ int IntegerList::getLength() {
 *
 *    \returns int The integer value at the given index.
 */
-int IntegerList::getElement(int element) {
-
+int IntegerArrayList::getElement(int element) {
     try
     {
         if (element < 0  || element > length-1)
         {
-            throw std::out_of_range('Requested index location does not exist in array.');
+            throw std::out_of_range("Requested index location does not exist in array.");
         }
     }
     catch (std::out_of_range& e)
@@ -251,20 +250,20 @@ int IntegerList::getElement(int element) {
     }
     catch (...)
     {
-        std::cerr << "Unknown exception while fetching index value." << std:endl;
+        std::cerr << "Unknown exception while fetching index value." << std::endl;
     }
 
     // valid index location, proceed...
     return list[element];
 }
 
-void IntegerList::copyArray(int* source, int* destination) {
+void IntegerArrayList::copyArray(int* source, int* destination) {
   for(int i = 0; i < length; i++) {
     destination[i] = source[i];
   }
 }
 
-void IntegerList::replaceList(int *newList) {
+void IntegerArrayList::replaceList(int *newList) {
   delete[] list;
   list = newList;
   newList = nullptr;
@@ -273,7 +272,7 @@ void IntegerList::replaceList(int *newList) {
 /**
     Sorts the current list in ascending order using the bubblesort method.
 */
-void IntegerList::sort () {
+void IntegerArrayList::sort () {
 
     for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
         for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {

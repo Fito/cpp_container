@@ -2,7 +2,7 @@
  *  6/25/15 by MHS
  */
 
-#include "IntegerList.h"
+#include "IntegerVectorList.h"
 #include <iostream>
 using namespace std;
 
@@ -12,7 +12,7 @@ using namespace std;
  */
 int main(){
 
-	IntegerList list;
+	IntegerVectorList list;
 
 	// list.push(10);
 	// cout << "length: " << list.getLength() << endl;

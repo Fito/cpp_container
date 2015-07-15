@@ -1,18 +1,18 @@
-/*  IntegerList.cpp
+/*  IntegerSortedList.cpp
  *  6/25/15 by MHS
  */
 
-#include "IntegerList.h"
+#include "IntegerSortedList.h"
 #include <iostream>
 using namespace std;
 
 /**
- * This main method tests the IntegerList method.  An IntegerList
+ * This main method tests the IntegerSortedList method.  An IntegerSortedList
  * is populated and the values printed out to the console.
  */
 int main(){
 
-	IntegerList list;
+	IntegerSortedList list;
 
 	list.insert(10);
 	list.insert(9);

@@ -1,19 +1,19 @@
-/*  IntegerList.cpp
+/*  IntegerLinkedList.cpp
  *  6/25/15 by MHS
  */
 
-#include "IntegerList.h"
+#include "IntegerLinkedList.h"
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
 
 /**
- * This main method tests the IntegerList method.  An IntegerList
+ * This main method tests the IntegerLinkedList method.  An IntegerLinkedList
  * is populated and the values printed out to the console.
  */
 int main(){
 
-	IntegerList list;
+	IntegerLinkedList list;
 
 	list.push(7);
 	list.push(12);

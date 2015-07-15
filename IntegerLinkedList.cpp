@@ -1,22 +1,22 @@
-/* IntegerList.cpp
+/* IntegerLinkedList.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file IntegerList.cpp */
+/** \file IntegerLinkedList.cpp */
 
 #include <iostream>
-#include "IntegerList.h"
+#include "IntegerLinkedList.h"
 
 /** Default constructor class. Takes no arguments. */
-IntegerList::IntegerList():
+IntegerLinkedList::IntegerLinkedList():
     headNode(NULL),
     endNode(NULL),
     length(0)
     {};
 
 /** Default class destructor. Takes no arguments. */
-IntegerList::~IntegerList() {
+IntegerLinkedList::~IntegerLinkedList() {
     Node * currentNode = headNode;
 
     while ( currentNode ) {
@@ -31,7 +31,7 @@ IntegerList::~IntegerList() {
 *
 *    \param value int An integer value to add to the top of the list.
 */
-void IntegerList::push(int value) {
+void IntegerLinkedList::push(int value) {
 
     Node * assignToNextNode = headNode;
 
@@ -64,7 +64,7 @@ void IntegerList::push(int value) {
 *
 *   \returns int The top element of the list.
 */
-int IntegerList::pop() {
+int IntegerLinkedList::pop() {
     try
     {
         checkListLength();
@@ -101,7 +101,7 @@ int IntegerList::pop() {
 *
 *   \param value int An integer value to add to the bottom of the list.
 */
-void IntegerList::pushEnd(int value) {
+void IntegerLinkedList::pushEnd(int value) {
     try
     {
         endNode->nextNode = new Node();
@@ -130,7 +130,7 @@ void IntegerList::pushEnd(int value) {
 *
 *    \returns int The bottom element of the list.
 */
-int IntegerList::popEnd() {
+int IntegerLinkedList::popEnd() {
     try
     {
         checkListLength();
@@ -173,7 +173,7 @@ int IntegerList::popEnd() {
 *
 *    \returns int The current length of the list.
 */
-int IntegerList::getLength() {
+int IntegerLinkedList::getLength() {
     return length;
 }
 
@@ -184,7 +184,7 @@ int IntegerList::getLength() {
 *
 *    \returns int The integer value at the given index.
 */
-int IntegerList::getElement(int element) {
+int IntegerLinkedList::getElement(int element) {
     try
     {
         checkListBounds(element);
@@ -210,7 +210,7 @@ int IntegerList::getElement(int element) {
 
 }
 
-void IntegerList::readOut() {
+void IntegerLinkedList::readOut() {
 
     Node * currentNode = headNode;
 
@@ -221,7 +221,7 @@ void IntegerList::readOut() {
 
 }
 
-void IntegerList::sort () {
+void IntegerLinkedList::sort () {
 
     Node * preNode = NULL;
     Node * leftNode = NULL;
@@ -272,7 +272,7 @@ void IntegerList::sort () {
 
 }   // end sort
 
-void IntegerList::checkListBounds(int index)
+void IntegerLinkedList::checkListBounds(int index)
 {
     if ( index < 0 || index > length )
     {
@@ -280,7 +280,7 @@ void IntegerList::checkListBounds(int index)
     }
 }
 
-void IntegerList::checkListLength()
+void IntegerLinkedList::checkListLength()
 {
     if (headNode == NULL || length == 0)
     {

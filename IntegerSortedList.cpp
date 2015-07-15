@@ -1,24 +1,24 @@
-/* IntegerList.cpp
+/* IntegerSortedList.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file IntegerList.cpp */
+/** \file IntegerSortedList.cpp */
+
 #include <exception>
-#include "IntegerList.h"
+#include "IntegerSortedList.h"
 
 Node::Node (int value):
     value(value),
     next(NULL)
     {};
 
-IntegerList::IntegerList():
+IntegerSortedList::IntegerSortedList():
         headNode(NULL),
         length(0)
         {};
 
-IntegerList::~IntegerList()
-{
+IntegerSortedList::~IntegerSortedList() {
     Node * currentNode = headNode;
 
     while (currentNode)
@@ -29,66 +29,37 @@ IntegerList::~IntegerList()
     }
 }
 
-void IntegerList::insert(int value)
-{
-        // List is empty and this will be the first entry
-        if (length == 0)
+void IntegerSortedList::insert(int value) {
+    // List is empty and this will be the first entry
+    if (length == 0)
+    {
+        try
         {
-            try
-            {
-                headNode = new Node(value);
-            }
-            catch (std::bad_alloc& e)
-            {
-                std::cerr << "Bad Allocation Exception: " << e.what() << "\n";
-                return;
-            }
-            catch (...)
-            {
-                std::cerr << "Unknown exception while allocating memory." << "\n";
-                return;
-            }
-
-            length++;
+            headNode = new Node(value);
+        }
+        catch (std::bad_alloc& e)
+        {
+            std::cerr << "Bad Allocation Exception: " << e.what() << "\n";
+            return;
+        }
+        catch (...)
+        {
+            std::cerr << "Unknown exception while allocating memory." << "\n";
             return;
         }
 
-        // Entry will be the first node
-        if (headNode->value >= value)
-        {
-            Node * oldHeadNode = headNode;
+        length++;
+        return;
+    }
 
-            try
-            {
-                headNode = new Node(value);
-            }
-            catch (std::bad_alloc& e)
-            {
-                std::cerr << "Bad Allocation Exception: " << "\n";
-                return;
-            }
-            catch (...)
-            {
-                std::cerr << "Unknown exception occured while allocating memory." << "\n";
-                return;
-            }
-
-            headNode->next = oldHeadNode;
-
-        }
-
-        // Entry will be subsequent node
-        Node * currentNode = headNode;
-
-        while (currentNode->next->value < value && currentNode->next != NULL) {
-            currentNode = currentNode->next;
-        }
-
-        Node * nodeToInsert;
+    // Entry will be the first node
+    if (headNode->value >= value)
+    {
+        Node * oldHeadNode = headNode;
 
         try
         {
-            nodeToInsert = new Node(value);
+            headNode = new Node(value);
         }
         catch (std::bad_alloc& e)
         {
@@ -97,20 +68,48 @@ void IntegerList::insert(int value)
         }
         catch (...)
         {
-            std::cerr << "An unknown error occured while allocating memory." << "\n";
+            std::cerr << "Unknown exception occured while allocating memory." << "\n";
             return;
         }
 
-        nodeToInsert->next = currentNode->next;
-        currentNode->next = nodeToInsert;
+        headNode->next = oldHeadNode;
 
-        nodeToInsert = NULL;
-        length++;
+    }
+
+    // Entry will be subsequent node
+    Node * currentNode = headNode;
+
+    while (currentNode->next->value < value && currentNode->next != NULL) {
+        currentNode = currentNode->next;
+    }
+
+    Node * nodeToInsert;
+
+    try
+    {
+        nodeToInsert = new Node(value);
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Bad Allocation Exception: " << "\n";
         return;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown error occured while allocating memory." << "\n";
+        return;
+    }
+
+    nodeToInsert->next = currentNode->next;
+    currentNode->next = nodeToInsert;
+
+    nodeToInsert = NULL;
+    length++;
+    return;
 
 }
 
-int IntegerList::get (int index)
+int IntegerSortedList::get (int index)
 {
     try
     {
@@ -137,7 +136,7 @@ int IntegerList::get (int index)
     return currentNode->value;
 }
 
-int IntegerList::count (int value) {
+int IntegerSortedList::count (int value) {
     Node *currentNode = headNode;
     int counter = 0;
 
@@ -151,7 +150,7 @@ int IntegerList::count (int value) {
 }
 
 
-int IntegerList::findElement (int value) {
+int IntegerSortedList::findElement (int value) {
 
     int counter = 0;
     Node * currentNode = headNode;
@@ -171,7 +170,7 @@ int IntegerList::findElement (int value) {
     return -1;
 }
 
-void IntegerList::removeElement (int index) {
+void IntegerSortedList::removeElement (int index) {
 
     // We'll want to throw an exception here if index > length - 1
 
@@ -203,7 +202,7 @@ void IntegerList::removeElement (int index) {
 
 }
 
-void IntegerList::readOut () {
+void IntegerSortedList::readOut () {
 
     Node * currentNode = headNode;
 

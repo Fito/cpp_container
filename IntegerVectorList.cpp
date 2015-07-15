@@ -1,20 +1,20 @@
-/* List.cpp
+/* IntegerVectorList.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file List.cpp */
+/** \file IntegerVectorList.cpp */
+
+#include "IntegerVectorList.h"
 #include <exception>
 
 /** Default class constructor. Takes no arguments. */
-template <typename T>
-List<T>::List():
+IntegerVectorList::IntegerVectorList():
     list(NULL)
     {};
 
 /** Default class destructor. Takes no arguments. */
-template <typename T>
-List<T>::~List() {
+IntegerVectorList::~IntegerVectorList() {
     delete list;
 }
 
@@ -23,13 +23,12 @@ List<T>::~List() {
 *
 *    \param value int An integer value to add to the top of the list.
 */
-template <typename T>
-void List<T>::push(T value) {
+void IntegerVectorList::push(int value) {
     if ( list == NULL )
     {
       try
       {
-        list = new std::vector<T>(0,0);
+        list = new std::vector<int>(0,0);
       }
       catch( std::bad_alloc& e )
       {
@@ -49,8 +48,7 @@ void List<T>::push(T value) {
 *
 *   \returns int The top element of the list.
 */
-template <typename T>
-T List<T>::pop() {
+int IntegerVectorList::pop() {
     try
     {
         checkListLength();
@@ -66,7 +64,7 @@ T List<T>::pop() {
         return 0;
     }
 
-    T returnValue = 0;
+    int returnValue = 0;
     returnValue = list->front();
 
     list->erase(list->begin());
@@ -78,13 +76,12 @@ T List<T>::pop() {
 *
 *   \param value int An integer value to add to the bottom of the list.
 */
-template <typename T>
-void List<T>::pushEnd(T value) {
+void IntegerVectorList::pushEnd(int value) {
     if ( list == NULL )
     {
       try
       {
-          list = new std::vector<T>(0,0);
+          list = new std::vector<int>(0,0);
       }
       catch( std::bad_alloc& e )
       {
@@ -104,8 +101,7 @@ void List<T>::pushEnd(T value) {
 *
 *    \returns int The bottom element of the list.
 */
-template <typename T>
-T List<T>::popEnd() {
+int IntegerVectorList::popEnd() {
     try
     {
         checkListLength();
@@ -121,7 +117,7 @@ T List<T>::popEnd() {
         return 0;
     }
 
-    T returnValue = list->back();
+    int returnValue = list->back();
     list->pop_back();
     return returnValue;
 }
@@ -131,8 +127,7 @@ T List<T>::popEnd() {
 *
 *    \returns int The current length of the list.
 */
-template <typename T>
-int List<T>::getLength() {
+int IntegerVectorList::getLength() {
     if ( list && list->size() )
     {
         return list->size();
@@ -150,9 +145,8 @@ int List<T>::getLength() {
 *
 *    \returns int The integer value at the given index.
 */
-template <typename T>
-T List<T>::getElement(int element) {
-    T returnValue;
+int IntegerVectorList::getElement(int element) {
+    int returnValue = 0;
     try
     {
         returnValue = list->at(element);
@@ -160,18 +154,36 @@ T List<T>::getElement(int element) {
     catch( std::out_of_range& e )
     {
         std::cerr << "Error while trying to get element: " << e.what() << "\n";
-        return returnValue;
     }
     catch( ... )
     {
         std::cerr << "Unknown error." << "\n";
-        return returnValue;
     }
     return returnValue;
 }
 
-template <typename T>
-void List<T>::checkListLength() {
+
+/**
+    Sorts elements of the list from lowest to highest.
+*/
+void IntegerVectorList::sort() {
+
+    int current_length = list->size();
+
+    for (int outer_pass = 0; outer_pass < current_length; outer_pass++) {
+        for (int inner_pass = 0; inner_pass < current_length - outer_pass - 1; inner_pass++) {
+            if (list->at(inner_pass) > list->at(inner_pass + 1)) {
+
+                int _temp = list->at(inner_pass);               //store pos1 in temp
+                list->at(inner_pass) = list->at(inner_pass+1);  //assign pos2 to pos1
+                list->at(inner_pass+1) = _temp;                  //assign temp to pos2
+
+            }
+        }
+    }
+}
+
+void IntegerVectorList::checkListLength() {
     if (list == NULL || list->size() == 0)
     {
       throw std::length_error("List is empty");
