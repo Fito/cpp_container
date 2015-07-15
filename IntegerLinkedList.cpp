@@ -16,7 +16,8 @@ IntegerLinkedList::IntegerLinkedList():
     {};
 
 /** Default class destructor. Takes no arguments. */
-IntegerLinkedList::~IntegerLinkedList() {
+IntegerLinkedList::~IntegerLinkedList()
+{
     Node * currentNode = headNode;
 
     while ( currentNode ) {
@@ -27,11 +28,12 @@ IntegerLinkedList::~IntegerLinkedList() {
 }
 
 /**
-*   Adds a new value to the top of the list.
+*   Add a new integer value to the front of the list.
 *
-*    \param value int An integer value to add to the top of the list.
+*    \param value int The integer value to be added.
 */
-void IntegerLinkedList::push(int value) {
+void IntegerLinkedList::push(int value)
+{
 
     Node * assignToNextNode = headNode;
 
@@ -51,7 +53,8 @@ void IntegerLinkedList::push(int value) {
     headNode->value = value;
     headNode->nextNode = assignToNextNode;
 
-    if (length == 0) {
+    if (length == 0)
+    {
         endNode = headNode;
     }
 
@@ -60,11 +63,14 @@ void IntegerLinkedList::push(int value) {
 }
 
 /**
-*   Removes and returns a single value from the top of the list.
+*   Removes and returns an integer value from the front of the list.
+*   If list is empty a value of zero is returned.
+*   It is strongly advised you check list size before calling the pop() method.
 *
-*   \returns int The top element of the list.
+*   \returns int The integer value at the front of the list, if available.
 */
-int IntegerLinkedList::pop() {
+int IntegerLinkedList::pop()
+{
     try
     {
         checkListLength();
@@ -97,11 +103,12 @@ int IntegerLinkedList::pop() {
 }
 
 /**
-*   Adds a new value to the bottom of the list.
+*   Add a new integer value to the back of the list.
 *
-*   \param value int An integer value to add to the bottom of the list.
+*    \param value int The integer value to be added.
 */
-void IntegerLinkedList::pushEnd(int value) {
+void IntegerLinkedList::pushEnd(int value)
+{
     try
     {
         endNode->nextNode = new Node();
@@ -126,11 +133,14 @@ void IntegerLinkedList::pushEnd(int value) {
 }
 
 /**
-*    Removes and returns a single value from the bottom of the list.
+*   Removes and returns an integer value from the back of the list.
+*   If list is empty a value of zero is returned.
+*   It is strongly advised you check list size before calling the pop() method.
 *
-*    \returns int The bottom element of the list.
+*   \returns int The integer value at the back of the list, if available.
 */
-int IntegerLinkedList::popEnd() {
+int IntegerLinkedList::popEnd()
+{
     try
     {
         checkListLength();
@@ -173,18 +183,22 @@ int IntegerLinkedList::popEnd() {
 *
 *    \returns int The current length of the list.
 */
-int IntegerLinkedList::getLength() {
+int IntegerLinkedList::getLength()
+{
     return length;
 }
 
 /**
-*    Given an index value, returns the element at the given index value without removing it.
+*   Returns the integer at the given index value, if valid.
+*   If the index value is invalid, zero will be returned.
+*   We strongly advise checking length before calling getElement to ensure your request is valid.
 *
-*    \param element int A valid index value.
+*    \param element int An index value in the list.
 *
 *    \returns int The integer value at the given index.
 */
-int IntegerLinkedList::getElement(int element) {
+int IntegerLinkedList::getElement(int element)
+{
     try
     {
         checkListBounds(element);
@@ -210,18 +224,11 @@ int IntegerLinkedList::getElement(int element) {
 
 }
 
-void IntegerLinkedList::readOut() {
-
-    Node * currentNode = headNode;
-
-    for (int i = 0; i < length; i++) {
-        std::cout << currentNode->value << " ";
-        currentNode = currentNode->nextNode;
-    }
-
-}
-
-void IntegerLinkedList::sort () {
+/**
+    Sorts the current list in ascending order using the bubblesort method.
+*/
+void IntegerLinkedList::sort ()
+{
 
     Node * preNode = NULL;
     Node * leftNode = NULL;
@@ -257,8 +264,9 @@ void IntegerLinkedList::sort () {
                 preNode = rightNode;
                 leftNode = leftNode;
                 rightNode = leftNode->nextNode;
-
-            } else {
+            }
+            else
+            {
 
                 preNode = leftNode;
                 leftNode = rightNode;
@@ -266,10 +274,7 @@ void IntegerLinkedList::sort () {
 
             }
         }
-
     }
-
-
 }   // end sort
 
 void IntegerLinkedList::checkListBounds(int index)
