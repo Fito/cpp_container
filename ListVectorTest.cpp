@@ -1,8 +1,8 @@
-/*  VectorList.cpp
+/*  ListVector.cpp
  *  6/25/15 by MHS
  */
 
-#include "VectorList.h"
+#include "ListVector.h"
 #include <iostream>
 using namespace std;
 
@@ -12,7 +12,7 @@ using namespace std;
  */
 int main(){
 
-	VectorList<int> *list = new VectorList<int>();
+	ListVector<int> *list = new ListVector<int>();
 
 	list->push(10);
 	cout << "length: " << list->getLength() << endl;

@@ -1,13 +1,13 @@
-/* IntegerLinkedList.h
+/* IntegerListLink.h
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/**	\file IntegerLinkedList.h
+/**	\file IntegerListLink.h
  *	\mainpage
- *	<h1>IntegerLinkedList</h1>
- *	IntegerLinkedList is a List container-type specifically for storing and retrieving integers.<br>
- *	Despite it's name, IntegerLinkedList is actually a Deque, and provides double-ended push and pop functionality.<br>
+ *	<h1>IntegerListLink</h1>
+ *	IntegerListLink is a List container-type specifically for storing and retrieving integers.<br>
+ *	Despite it's name, IntegerListLink is actually a Deque, and provides double-ended push and pop functionality.<br>
  */
 
 #ifndef __INTEGER_LINKED_LIST__H__
@@ -20,7 +20,7 @@ class Node
 		Node *nextNode;
 };
 
-class IntegerLinkedList
+class IntegerListLink
 {
 	private:
 		Node *headNode;
@@ -29,8 +29,8 @@ class IntegerLinkedList
 		void checkListLength();
 		void checkListBounds(int index);
 	public:
-		IntegerLinkedList();
-		~IntegerLinkedList();
+		IntegerListLink();
+		~IntegerListLink();
 		void push(int value);
 		int pop();
 		void pushEnd(int value);

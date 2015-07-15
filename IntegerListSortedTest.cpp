@@ -1,18 +1,18 @@
-/*  IntegerSortedList.cpp
+/*  IntegerListSorted.cpp
  *  6/25/15 by MHS
  */
 
-#include "IntegerSortedList.h"
+#include "IntegerListSorted.h"
 #include <iostream>
 using namespace std;
 
 /**
- * This main method tests the IntegerSortedList method.  An IntegerSortedList
+ * This main method tests the IntegerListSorted method.  An IntegerListSorted
  * is populated and the values printed out to the console.
  */
 int main(){
 
-	IntegerSortedList list;
+	IntegerListSorted list;
 
 	list.insert(10);
 	list.insert(9);
@@ -24,18 +24,12 @@ int main(){
 	list.insert(5);
 	list.insert(6);
 
-	list.readOut();
-
 	cout << "Instance of 4 at: " <<(list.findElement(4)) << endl;
 	cout << "Intance of 17 at: " <<(list.findElement(17)) << endl;
-
-	list.readOut();
 
 	list.removeElement(4);
 
 	cout << "Element at index 4 removed." << endl;
-
-	list.readOut();
 
 	cout << "Instance of 4 at: " << (list.findElement(4)) << endl;
 

@@ -1,12 +1,12 @@
-/* IntegerSortedList.cpp
+/* IntegerListSorted.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file IntegerSortedList.cpp */
+/** \file IntegerListSorted.cpp */
 
 #include <exception>
-#include "IntegerSortedList.h"
+#include "IntegerListSorted.h"
 
 Node::Node (int value):
     value(value),
@@ -14,13 +14,13 @@ Node::Node (int value):
     {};
 
 /** Default constructor class. Takes no arguments. */
-IntegerSortedList::IntegerSortedList():
+IntegerListSorted::IntegerListSorted():
         headNode(NULL),
         length(0)
         {};
 
 /** Default destructor class. Takes no arguments. */
-IntegerSortedList::~IntegerSortedList()
+IntegerListSorted::~IntegerListSorted()
 {
     Node * currentNode = headNode;
 
@@ -37,7 +37,7 @@ IntegerSortedList::~IntegerSortedList()
 *
 *    \param value int The integer value to be added.
 */
-void IntegerSortedList::insert(int value)
+void IntegerListSorted::insert(int value)
 {
     // List is empty and this will be the first entry
     if (length == 0)
@@ -126,7 +126,8 @@ void IntegerSortedList::insert(int value)
 *
 *   \param index int The index position to be retrieved.
 */
-int IntegerSortedList::get (int index)
+
+int IntegerListSorted::get (int index)
 {
     try
     {
@@ -161,7 +162,8 @@ int IntegerSortedList::get (int index)
 *   \param value int The integer value to count instances of.
 *
 */
-int IntegerSortedList::count (int value)
+
+int IntegerListSorted::count (int value)
 {
     Node *currentNode = headNode;
     int counter = 0;
@@ -184,9 +186,9 @@ int IntegerSortedList::count (int value)
 *   \returns int The index position of the first instance of the element, or -1 if no instance found.
 *
 */
-int IntegerSortedList::findElement (int value)
-{
 
+int IntegerListSorted::findElement (int value)
+{
     int counter = 0;
     Node * currentNode = headNode;
 
@@ -210,8 +212,9 @@ int IntegerSortedList::findElement (int value)
 *
 *   \param index int The index position you want to remove.
 */
-void IntegerSortedList::removeElement (int index) {
 
+void IntegerListSorted::removeElement (int index)
+{
     // We'll want to throw an exception here if index > length - 1
 
     // Special case, 0th index

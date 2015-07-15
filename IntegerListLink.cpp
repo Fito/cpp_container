@@ -1,22 +1,22 @@
-/* IntegerLinkedList.cpp
+/* IntegerListLink.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file IntegerLinkedList.cpp */
+/** \file IntegerListLink.cpp */
 
 #include <iostream>
-#include "IntegerLinkedList.h"
+#include "IntegerListLink.h"
 
 /** Default constructor class. Takes no arguments. */
-IntegerLinkedList::IntegerLinkedList():
+IntegerListLink::IntegerListLink():
     headNode(NULL),
     endNode(NULL),
     length(0)
     {};
 
 /** Default class destructor. Takes no arguments. */
-IntegerLinkedList::~IntegerLinkedList()
+IntegerListLink::~IntegerListLink()
 {
     Node * currentNode = headNode;
 
@@ -32,7 +32,7 @@ IntegerLinkedList::~IntegerLinkedList()
 *
 *    \param value int The integer value to be added.
 */
-void IntegerLinkedList::push(int value)
+void IntegerListLink::push(int value)
 {
 
     Node * assignToNextNode = headNode;
@@ -69,7 +69,7 @@ void IntegerLinkedList::push(int value)
 *
 *   \returns int The integer value at the front of the list, if available.
 */
-int IntegerLinkedList::pop()
+int IntegerListLink::pop()
 {
     try
     {
@@ -107,7 +107,7 @@ int IntegerLinkedList::pop()
 *
 *    \param value int The integer value to be added.
 */
-void IntegerLinkedList::pushEnd(int value)
+void IntegerListLink::pushEnd(int value)
 {
     try
     {
@@ -139,7 +139,7 @@ void IntegerLinkedList::pushEnd(int value)
 *
 *   \returns int The integer value at the back of the list, if available.
 */
-int IntegerLinkedList::popEnd()
+int IntegerListLink::popEnd()
 {
     try
     {
@@ -183,7 +183,7 @@ int IntegerLinkedList::popEnd()
 *
 *    \returns int The current length of the list.
 */
-int IntegerLinkedList::getLength()
+int IntegerListLink::getLength()
 {
     return length;
 }
@@ -197,7 +197,7 @@ int IntegerLinkedList::getLength()
 *
 *    \returns int The integer value at the given index.
 */
-int IntegerLinkedList::getElement(int element)
+int IntegerListLink::getElement(int element)
 {
     try
     {
@@ -227,7 +227,7 @@ int IntegerLinkedList::getElement(int element)
 /**
     Sorts the current list in ascending order using the bubblesort method.
 */
-void IntegerLinkedList::sort ()
+void IntegerListLink::sort ()
 {
 
     Node * preNode = NULL;
@@ -277,7 +277,7 @@ void IntegerLinkedList::sort ()
     }
 }   // end sort
 
-void IntegerLinkedList::checkListBounds(int index)
+void IntegerListLink::checkListBounds(int index)
 {
     if ( index < 0 || index > length )
     {
@@ -285,7 +285,7 @@ void IntegerLinkedList::checkListBounds(int index)
     }
 }
 
-void IntegerLinkedList::checkListLength()
+void IntegerListLink::checkListLength()
 {
     if (headNode == NULL || length == 0)
     {

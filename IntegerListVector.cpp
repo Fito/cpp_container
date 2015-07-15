@@ -1,20 +1,20 @@
-/* VectorList.cpp
+/* IntegerListVector.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file VectorList.cpp */
+/** \file IntegerListVector.cpp */
+
+#include "IntegerListVector.h"
 #include <exception>
 
 /** Default class constructor. Takes no arguments. */
-template <typename T>
-VectorList<T>::VectorList():
+IntegerListVector::IntegerListVector():
     list(NULL)
     {};
 
 /** Default class destructor. Takes no arguments. */
-template <typename T>
-VectorList<T>::~VectorList() {
+IntegerListVector::~IntegerListVector() {
     delete list;
 }
 
@@ -23,13 +23,12 @@ VectorList<T>::~VectorList() {
 *
 *    \param value int An integer value to add to the top of the list.
 */
-template <typename T>
-void VectorList<T>::push(T value) {
+void IntegerListVector::push(int value) {
     if ( list == NULL )
     {
       try
       {
-        list = new std::vector<T>(0,0);
+        list = new std::vector<int>(0,0);
       }
       catch( std::bad_alloc& e )
       {
@@ -49,8 +48,7 @@ void VectorList<T>::push(T value) {
 *
 *   \returns int The top element of the list.
 */
-template <typename T>
-T VectorList<T>::pop() {
+int IntegerListVector::pop() {
     try
     {
         checkListLength();
@@ -66,7 +64,7 @@ T VectorList<T>::pop() {
         return 0;
     }
 
-    T returnValue = 0;
+    int returnValue = 0;
     returnValue = list->front();
 
     list->erase(list->begin());
@@ -78,13 +76,12 @@ T VectorList<T>::pop() {
 *
 *   \param value int An integer value to add to the bottom of the list.
 */
-template <typename T>
-void VectorList<T>::pushEnd(T value) {
+void IntegerListVector::pushEnd(int value) {
     if ( list == NULL )
     {
       try
       {
-          list = new std::vector<T>(0,0);
+          list = new std::vector<int>(0,0);
       }
       catch( std::bad_alloc& e )
       {
@@ -104,8 +101,7 @@ void VectorList<T>::pushEnd(T value) {
 *
 *    \returns int The bottom element of the list.
 */
-template <typename T>
-T VectorList<T>::popEnd() {
+int IntegerListVector::popEnd() {
     try
     {
         checkListLength();
@@ -121,7 +117,7 @@ T VectorList<T>::popEnd() {
         return 0;
     }
 
-    T returnValue = list->back();
+    int returnValue = list->back();
     list->pop_back();
     return returnValue;
 }
@@ -131,8 +127,7 @@ T VectorList<T>::popEnd() {
 *
 *    \returns int The current length of the list.
 */
-template <typename T>
-int VectorList<T>::getLength() {
+int IntegerListVector::getLength() {
     if ( list && list->size() )
     {
         return list->size();
@@ -150,9 +145,8 @@ int VectorList<T>::getLength() {
 *
 *    \returns int The integer value at the given index.
 */
-template <typename T>
-T VectorList<T>::getElement(int element) {
-    T returnValue;
+int IntegerListVector::getElement(int element) {
+    int returnValue = 0;
     try
     {
         returnValue = list->at(element);
@@ -160,18 +154,36 @@ T VectorList<T>::getElement(int element) {
     catch( std::out_of_range& e )
     {
         std::cerr << "Error while trying to get element: " << e.what() << "\n";
-        return returnValue;
     }
     catch( ... )
     {
         std::cerr << "Unknown error." << "\n";
-        return returnValue;
     }
     return returnValue;
 }
 
-template <typename T>
-void VectorList<T>::checkListLength() {
+
+/**
+    Sorts elements of the list from lowest to highest.
+*/
+void IntegerListVector::sort() {
+
+    int current_length = list->size();
+
+    for (int outer_pass = 0; outer_pass < current_length; outer_pass++) {
+        for (int inner_pass = 0; inner_pass < current_length - outer_pass - 1; inner_pass++) {
+            if (list->at(inner_pass) > list->at(inner_pass + 1)) {
+
+                int _temp = list->at(inner_pass);               //store pos1 in temp
+                list->at(inner_pass) = list->at(inner_pass+1);  //assign pos2 to pos1
+                list->at(inner_pass+1) = _temp;                  //assign temp to pos2
+
+            }
+        }
+    }
+}
+
+void IntegerListVector::checkListLength() {
     if (list == NULL || list->size() == 0)
     {
       throw std::length_error("List is empty");

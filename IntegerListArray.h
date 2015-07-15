@@ -1,19 +1,19 @@
-/* IntegerArrayList.h
+/* IntegerListArray.h
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/**	\file IntegerArrayList.h
+/**	\file IntegerListArray.h
  *	\mainpage
  *	<h1>List Library</h1>
  *	The List Library contains a number of classes for implementing double-ended lists.<br>
- *	Most of the classes are solely for use with Integer datatype, however, the VectorList template can be used with any datatype.<br>
+ *	Most of the classes are solely for use with Integer datatype, however, the ListVector template can be used with any datatype.<br>
  */
 
 #ifndef __INTEGER_ARRAY_LIST__H__
 #define __INTEGER_ARRAY_LIST__H__
 
-class IntegerArrayList
+class IntegerListArray
 {
 	private:
 		int *list;
@@ -22,7 +22,7 @@ class IntegerArrayList
 		void replaceList(int *newList);
 		void copyArray(int* source, int* destination);
 	public:
-		IntegerArrayList();
+		IntegerListArray();
 		void push(int value);
 		int pop();
 		void pushEnd(int value);

@@ -10,26 +10,28 @@
  *	Despite it's name, IntegerList is actually a Deque, and provides double-ended push and pop functionality.<br>
  */
 
-#ifndef __INTEGER_VECTOR_LIST__H__
-#define __INTEGER_VECTOR_LIST__H__
+#ifndef __VECTOR_LIST__H__
+#define __VECTOR_LIST__H__
 
 #include <vector>
 #include <iostream>
 
-class IntegerVectorList{
-private:
-	std::vector<int> *list;
-	void checkListLength();
-public:
-	IntegerVectorList();
-	~IntegerVectorList();
-	void push(int value);
-	int pop();
-	void pushEnd(int value);
-	int popEnd();
-	int getLength();
-	int getElement(int element);
-	void sort();
+template <typename T>
+class ListVector {
+	private:
+		std::vector<T> *list;
+		void checkListLength();
+	public:
+		ListVector();
+		~ListVector();
+		void push(T value);
+		T pop();
+		void pushEnd(T value);
+		T popEnd();
+		int getLength();
+		T getElement(int element);
 };
+
+#include "ListVector.cpp"
 
 #endif

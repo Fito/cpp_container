@@ -1,16 +1,16 @@
-/* IntegerArrayList.cpp
+/* IntegerListArray.cpp
  * 6/29/15
  * Brook Thomas - Adolfo von Zastrow
  */
 
-/** \file IntegerArrayList.cpp */
+/** \file IntegerListArray.cpp */
 
 #include <iostream>
 #include <exception>
-#include "IntegerArrayList.h"
+#include "IntegerListArray.h"
 
 /** Default constructor class. Takes no arguments. */
-IntegerArrayList::IntegerArrayList():
+IntegerListArray::IntegerListArray():
   list(nullptr),
   length(0)
   {};
@@ -20,7 +20,7 @@ IntegerArrayList::IntegerArrayList():
 *
 *    \param value int The integer value to be added.
 */
-void IntegerArrayList::push(int value)
+void IntegerListArray::push(int value)
 {
     // If the list is currently empty...
     if (length == 0)
@@ -77,7 +77,7 @@ void IntegerArrayList::push(int value)
 *
 *   \returns int The integer value at the front of the list, if available.
 */
-int IntegerArrayList::pop()
+int IntegerListArray::pop()
 {
     try
     {
@@ -135,7 +135,7 @@ int IntegerArrayList::pop()
 *
 *    \param value int The integer value to be added.
 */
-void IntegerArrayList::pushEnd(int value)
+void IntegerListArray::pushEnd(int value)
 {
     if (!length)
     {
@@ -174,7 +174,7 @@ void IntegerArrayList::pushEnd(int value)
 *
 *   \returns int The integer value at the back of the list, if available.
 */
-int IntegerArrayList::popEnd()
+int IntegerListArray::popEnd()
 {
 
     try
@@ -230,7 +230,7 @@ int IntegerArrayList::popEnd()
 *
 *    \returns int The current length of the list.
 */
-int IntegerArrayList::getLength()
+int IntegerListArray::getLength()
 {
   return length;
 }
@@ -244,7 +244,7 @@ int IntegerArrayList::getLength()
 *
 *    \returns int The integer value at the given index.
 */
-int IntegerArrayList::getElement(int element)
+int IntegerListArray::getElement(int element)
 {
     try
     {
@@ -268,14 +268,14 @@ int IntegerArrayList::getElement(int element)
     return list[element];
 }
 
-void IntegerArrayList::copyArray(int* source, int* destination)
+void IntegerListArray::copyArray(int* source, int* destination)
 {
   for(int i = 0; i < length; i++) {
     destination[i] = source[i];
   }
 }
 
-void IntegerArrayList::replaceList(int *newList)
+void IntegerListArray::replaceList(int *newList)
 {
   delete[] list;
   list = newList;
@@ -285,7 +285,7 @@ void IntegerArrayList::replaceList(int *newList)
 /**
     Sorts the current list in ascending order using the bubblesort method.
 */
-void IntegerArrayList::sort ()
+void IntegerListArray::sort ()
 {
     for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
         for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
