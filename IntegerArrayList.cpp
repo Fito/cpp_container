@@ -16,9 +16,9 @@ IntegerArrayList::IntegerArrayList():
   {};
 
 /**
-*   Adds a new value to the front of the list.
+*   Add a new integer value to the front of the list.
 *
-*    \param value int An integer value to add to the front of the list.
+*    \param value int The integer value to be added.
 */
 void IntegerArrayList::push(int value)
 {
@@ -71,9 +71,11 @@ void IntegerArrayList::push(int value)
 }
 
 /**
-*   Removes and returns a single value from the front of the list.
+*   Removes and returns an integer value from the front of the list.
+*   If list is empty a value of zero is returned.
+*   It is strongly advised you check list size before calling the pop() method.
 *
-*   \returns int The front element of the list.
+*   \returns int The integer value at the front of the list, if available.
 */
 int IntegerArrayList::pop()
 {
@@ -129,9 +131,9 @@ int IntegerArrayList::pop()
 }
 
 /**
-*   Adds a new value to the end of the list.
+*   Add a new integer value to the back of the list.
 *
-*   \param value int An integer value to add to the end of the list.
+*    \param value int The integer value to be added.
 */
 void IntegerArrayList::pushEnd(int value)
 {
@@ -166,11 +168,14 @@ void IntegerArrayList::pushEnd(int value)
 }
 
 /**
-*    Removes and returns a single value from the back of the list.
+*   Removes and returns an integer value from the back of the list.
+*   If list is empty a value of zero is returned.
+*   It is strongly advised you check list size before calling the pop() method.
 *
-*    \returns int The back element of the list.
+*   \returns int The integer value at the back of the list, if available.
 */
-int IntegerArrayList::popEnd() {
+int IntegerArrayList::popEnd()
+{
 
     try
     {
@@ -225,18 +230,22 @@ int IntegerArrayList::popEnd() {
 *
 *    \returns int The current length of the list.
 */
-int IntegerArrayList::getLength() {
+int IntegerArrayList::getLength()
+{
   return length;
 }
 
 /**
-*    Given an index value, returns the element at the given index value without removing it.
+*   Returns the integer at the given index value, if valid.
+*   If the index value is invalid, zero will be returned.
+*   We strongly advise checking length before calling getElement to ensure your request is valid.
 *
-*    \param element int A valid index value.
+*    \param element int An index value in the list.
 *
 *    \returns int The integer value at the given index.
 */
-int IntegerArrayList::getElement(int element) {
+int IntegerArrayList::getElement(int element)
+{
     try
     {
         if (element < 0  || element > length-1)
@@ -247,25 +256,27 @@ int IntegerArrayList::getElement(int element) {
     catch (std::out_of_range& e)
     {
         std::cerr << "Out of Range Exception: " << e.what() << std::endl;
-        return;
+        return 0;
     }
     catch (...)
     {
         std::cerr << "Unknown exception while fetching index value." << std::endl;
-        return;
+        return 0;
     }
 
     // valid index location, proceed...
     return list[element];
 }
 
-void IntegerArrayList::copyArray(int* source, int* destination) {
+void IntegerArrayList::copyArray(int* source, int* destination)
+{
   for(int i = 0; i < length; i++) {
     destination[i] = source[i];
   }
 }
 
-void IntegerArrayList::replaceList(int *newList) {
+void IntegerArrayList::replaceList(int *newList)
+{
   delete[] list;
   list = newList;
   newList = nullptr;
@@ -274,8 +285,8 @@ void IntegerArrayList::replaceList(int *newList) {
 /**
     Sorts the current list in ascending order using the bubblesort method.
 */
-void IntegerArrayList::sort () {
-
+void IntegerArrayList::sort ()
+{
     for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
         for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
 

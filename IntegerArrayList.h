@@ -5,9 +5,9 @@
 
 /**	\file IntegerArrayList.h
  *	\mainpage
- *	<h1>IntegerArrayList</h1>
- *	IntegerArrayList is a List container-type specifically for storing and retrieving integers.<br>
- *	Despite it's name, IntegerArrayList is actually a Deque, and provides double-ended push and pop functionality.<br>
+ *	<h1>List Library</h1>
+ *	The List Library contains a number of classes for implementing double-ended lists.<br>
+ *	Most of the classes are solely for use with Integer datatype, however, the VectorList template can be used with any datatype.<br>
  */
 
 #ifndef __INTEGER_ARRAY_LIST__H__
