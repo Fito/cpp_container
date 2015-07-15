@@ -28,6 +28,7 @@ private:
 	int length;
 public:
 	IntegerList();
+	~IntegerList();
 	void insert(int value);
 	int get (int index);
 	int count (int value);

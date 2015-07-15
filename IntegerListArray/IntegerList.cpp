@@ -16,12 +16,13 @@ IntegerList::IntegerList():
   {};
 
 /**
-*   Adds a new value to the top of the list.
+*   Adds a new value to the front of the list.
 *
-*    \param value int An integer value to add to the top of the list.
+*    \param value int An integer value to add to the front of the list.
 */
 void IntegerList::push(int value)
 {
+    // If the list is currently empty...
     if (length == 0)
     {
         try
@@ -65,13 +66,14 @@ void IntegerList::push(int value)
 
     copyArray(list, newList + 1);
     replaceList(newList);
+    return;
 
 }
 
 /**
-*   Removes and returns a single value from the top of the list.
+*   Removes and returns a single value from the front of the list.
 *
-*   \returns int The top element of the list.
+*   \returns int The front element of the list.
 */
 int IntegerList::pop()
 {
@@ -93,13 +95,29 @@ int IntegerList::pop()
         return 0;
     }
 
+    // Established the list isn't empty - continue...
     int returnValue = list[0];
+    int *newList;
 
-    int *newList = new int[length];
+    try
+    {
+        newList = new int[length];
+    }
+    catch (std::bad_alloc& e)
+    {
+        std::cerr << "Bad Allocation Exception: " << e.what() << std::endl;
+        return;
+    }
+    catch (...)
+    {
+        std::cerr << "An unknown exception occured while allocating memory for an array." << std::endl;
+        return;
+    }
 
     copyArray(list + 1, newList);
     replaceList(newList);
 
+    // The list might be zero length now, delete the array if so
     if (--length == 0)
     {
         delete[] list;
@@ -111,9 +129,9 @@ int IntegerList::pop()
 }
 
 /**
-*   Adds a new value to the bottom of the list.
+*   Adds a new value to the end of the list.
 *
-*   \param value int An integer value to add to the bottom of the list.
+*   \param value int An integer value to add to the end of the list.
 */
 void IntegerList::pushEnd(int value)
 {
@@ -123,6 +141,7 @@ void IntegerList::pushEnd(int value)
         return;
     }
 
+    // At least one element in list already, continue...
     int *newList;
 
     try
@@ -147,9 +166,9 @@ void IntegerList::pushEnd(int value)
 }
 
 /**
-*    Removes and returns a single value from the bottom of the list.
+*    Removes and returns a single value from the back of the list.
 *
-*    \returns int The bottom element of the list.
+*    \returns int The back element of the list.
 */
 int IntegerList::popEnd() {
 
@@ -191,6 +210,7 @@ int IntegerList::popEnd() {
     copyArray(list, newList);
     replaceList(newList);
 
+    // List might be empty now, if so delete the array
     if (length == 0)
     {
         delete[] list;
@@ -217,7 +237,25 @@ int IntegerList::getLength() {
 *    \returns int The integer value at the given index.
 */
 int IntegerList::getElement(int element) {
-  return list[element];
+
+    try
+    {
+        if (element < 0  || element > length-1)
+        {
+            throw std::out_of_range('Requested index location does not exist in array.');
+        }
+    }
+    catch (std::out_of_range& e)
+    {
+        std::cerr << "Out of Range Exception: " << e.what() << std::endl;
+    }
+    catch (...)
+    {
+        std::cerr << "Unknown exception while fetching index value." << std:endl;
+    }
+
+    // valid index location, proceed...
+    return list[element];
 }
 
 void IntegerList::copyArray(int* source, int* destination) {
@@ -232,6 +270,9 @@ void IntegerList::replaceList(int *newList) {
   newList = nullptr;
 }
 
+/**
+    Sorts the current list in ascending order using the bubblesort method.
+*/
 void IntegerList::sort () {
 
     for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
