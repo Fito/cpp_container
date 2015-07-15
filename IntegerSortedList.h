@@ -34,7 +34,6 @@ public:
 	int count (int value);
 	int findElement (int value);
 	void removeElement (int index);
-	void readOut ();
 };
 
 #endif

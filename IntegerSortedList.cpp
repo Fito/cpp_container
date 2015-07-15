@@ -13,12 +13,15 @@ Node::Node (int value):
     next(NULL)
     {};
 
+/** Default constructor class. Takes no arguments. */
 IntegerSortedList::IntegerSortedList():
         headNode(NULL),
         length(0)
         {};
 
-IntegerSortedList::~IntegerSortedList() {
+/** Default destructor class. Takes no arguments. */
+IntegerSortedList::~IntegerSortedList()
+{
     Node * currentNode = headNode;
 
     while (currentNode)
@@ -29,7 +32,13 @@ IntegerSortedList::~IntegerSortedList() {
     }
 }
 
-void IntegerSortedList::insert(int value) {
+/**
+*   Add a new integer value to the list. The item will be sorted into ascending order.
+*
+*    \param value int The integer value to be added.
+*/
+void IntegerSortedList::insert(int value)
+{
     // List is empty and this will be the first entry
     if (length == 0)
     {
@@ -79,7 +88,8 @@ void IntegerSortedList::insert(int value) {
     // Entry will be subsequent node
     Node * currentNode = headNode;
 
-    while (currentNode->next->value < value && currentNode->next != NULL) {
+    while (currentNode->next->value < value && currentNode->next != NULL)
+    {
         currentNode = currentNode->next;
     }
 
@@ -109,6 +119,13 @@ void IntegerSortedList::insert(int value) {
 
 }
 
+/**
+*   Retrieve the integer at the provided index value.
+*   Returns a value of 0 if the index position is not valid.
+*   We strongly advise checking length before calling get().
+*
+*   \param index int The index position to be retrieved.
+*/
 int IntegerSortedList::get (int index)
 {
     try
@@ -121,10 +138,12 @@ int IntegerSortedList::get (int index)
     catch (std::out_of_range& e)
     {
         std::cerr << "Out of Range Exception: " << e.what() << "\n";
+        return 0;
     }
     catch (...)
     {
         std::cerr << "Unknown exception why retriving index value." << "\n";
+        return 0;
     }
 
     Node *currentNode = headNode;
@@ -136,7 +155,14 @@ int IntegerSortedList::get (int index)
     return currentNode->value;
 }
 
-int IntegerSortedList::count (int value) {
+/**
+*   Given an integer value, count() will return the instances of that value within the list.
+*
+*   \param value int The integer value to count instances of.
+*
+*/
+int IntegerSortedList::count (int value)
+{
     Node *currentNode = headNode;
     int counter = 0;
 
@@ -149,8 +175,17 @@ int IntegerSortedList::count (int value) {
     return counter;
 }
 
-
-int IntegerSortedList::findElement (int value) {
+/**
+*   Given a integer value, returns the index position of the first instance of that value.
+*   If no instance is found, a value of -1 is returned.
+*
+*   \param value int The integer value to find.
+*
+*   \returns int The index position of the first instance of the element, or -1 if no instance found.
+*
+*/
+int IntegerSortedList::findElement (int value)
+{
 
     int counter = 0;
     Node * currentNode = headNode;
@@ -170,6 +205,11 @@ int IntegerSortedList::findElement (int value) {
     return -1;
 }
 
+/**
+*   Given an index value, removes the integer at that position without returning.
+*
+*   \param index int The index position you want to remove.
+*/
 void IntegerSortedList::removeElement (int index) {
 
     // We'll want to throw an exception here if index > length - 1
@@ -199,18 +239,5 @@ void IntegerSortedList::removeElement (int index) {
 
     nodeBeforeTargetNode = NULL;
     nodeAfterTargetNode = NULL;
-
-}
-
-void IntegerSortedList::readOut () {
-
-    Node * currentNode = headNode;
-
-    while (currentNode != NULL) {
-        std::cout << currentNode->value << " ";
-        currentNode = currentNode->next;
-    }
-
-    std::cout << std::endl;
 
 }
