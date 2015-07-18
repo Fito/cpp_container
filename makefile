@@ -12,3 +12,8 @@ IntegerListVector.o: IntegerListVector.h IntegerListVector.cpp
 
 List.o: List.h List.cpp
 	g++ -c List.cpp
+
+clean:
+	rm -f *.o
+
+
