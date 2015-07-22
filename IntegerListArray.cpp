@@ -9,6 +9,13 @@
 #include <exception>
 #include "IntegerListArray.h"
 
+void copyArray(int* source, int* destination, int length)
+{
+  for(int i = 0; i < length; i++) {
+    destination[i] = source[i];
+  }
+}
+
 /** Default constructor class. Takes no arguments. */
 IntegerListArray::IntegerListArray():
   list(nullptr),
@@ -64,8 +71,12 @@ void IntegerListArray::push(int value)
 
     newList[0] = value;
 
-    copyArray(list, newList + 1);
-    replaceList(newList);
+    copyArray(list, newList + 1, length);
+
+    delete[] list;
+    list = newList;
+    newList = nullptr;
+
     return;
 
 }
@@ -116,8 +127,10 @@ int IntegerListArray::pop()
         return 0;
     }
 
-    copyArray(list + 1, newList);
-    replaceList(newList);
+    copyArray(list + 1, newList, length);
+    delete[] list;
+    list = newList;
+    newList = nullptr;
 
     // The list might be zero length now, delete the array if so
     if (--length == 0)
@@ -161,8 +174,10 @@ void IntegerListArray::pushEnd(int value)
         return;
     }
 
-    copyArray(list, newList);
-    replaceList(newList);
+    copyArray(list, newList, length);
+    delete[] list;
+    list = newList;
+    newList = nullptr;
 
     list[length++] = value;
 }
@@ -212,8 +227,11 @@ int IntegerListArray::popEnd()
         std::cerr << "An unknown error occured while allocating space for an array." << std::endl;
     }
 
-    copyArray(list, newList);
-    replaceList(newList);
+    copyArray(list, newList, length);
+
+    delete[] list;
+    list = newList;
+    newList = nullptr;
 
     // List might be empty now, if so delete the array
     if (length == 0)
@@ -268,33 +286,19 @@ int IntegerListArray::getElement(int element)
     return list[element];
 }
 
-void IntegerListArray::copyArray(int* source, int* destination)
-{
-  for(int i = 0; i < length; i++) {
-    destination[i] = source[i];
-  }
-}
-
-void IntegerListArray::replaceList(int *newList)
-{
-  delete[] list;
-  list = newList;
-  newList = nullptr;
-}
-
 /**
     Sorts the current list in ascending order using the bubblesort method.
 */
-void IntegerListArray::sort ()
-{
-    for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
-        for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
-
-            if (list[inner_pass] > list[inner_pass+1]) {
-                int tempStorage = list[inner_pass];
-                list[inner_pass] = list[inner_pass+1];
-                list[inner_pass+1] = tempStorage;
-            }
-        }
-    }
-}
+// void IntegerListArray::sort ()
+// {
+//     for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
+//         for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
+//
+//             if (list[inner_pass] > list[inner_pass+1]) {
+//                 int tempStorage = list[inner_pass];
+//                 list[inner_pass] = list[inner_pass+1];
+//                 list[inner_pass+1] = tempStorage;
+//             }
+//         }
+//     }
+// }

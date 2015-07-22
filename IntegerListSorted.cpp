@@ -6,31 +6,27 @@
 /** \file IntegerListSorted.cpp */
 
 #include <exception>
+#include <iostream>
 #include "IntegerListSorted.h"
-
-Node::Node (int value):
-    value(value),
-    next(NULL)
-    {};
 
 /** Default constructor class. Takes no arguments. */
 IntegerListSorted::IntegerListSorted():
-        headNode(NULL),
+        head(NULL),
         length(0)
         {};
 
 /** Default destructor class. Takes no arguments. */
-IntegerListSorted::~IntegerListSorted()
-{
-    Node * currentNode = headNode;
-
-    while (currentNode)
-    {
-        Node * nextNode = currentNode->next;
-        delete currentNode;
-        currentNode = nextNode;
-    }
-}
+// IntegerListSorted::~IntegerListSorted()
+// {
+//     Node<int> * currentNode = head;
+//
+//     while (currentNode)
+//     {
+//         Node<int> * nextNode = currentNode->next;
+//         delete currentNode;
+//         currentNode = nextNode;
+//     }
+// }
 
 /**
 *   Add a new integer value to the list. The item will be sorted into ascending order.
@@ -44,7 +40,8 @@ void IntegerListSorted::insert(int value)
     {
         try
         {
-            headNode = new Node(value);
+            head = new Node<int>();
+            head->value = value;
         }
         catch (std::bad_alloc& e)
         {
@@ -62,13 +59,14 @@ void IntegerListSorted::insert(int value)
     }
 
     // Entry will be the first node
-    if (headNode->value >= value)
+    if (head->value >= value)
     {
-        Node * oldHeadNode = headNode;
+        Node<int> * oldHeadNode = head;
 
         try
         {
-            headNode = new Node(value);
+            head = new Node<int>();
+            head->value = value;
         }
         catch (std::bad_alloc& e)
         {
@@ -81,23 +79,24 @@ void IntegerListSorted::insert(int value)
             return;
         }
 
-        headNode->next = oldHeadNode;
+        head->next = oldHeadNode;
 
     }
 
     // Entry will be subsequent node
-    Node * currentNode = headNode;
+    Node<int> * currentNode = head;
 
     while (currentNode->next->value < value && currentNode->next != NULL)
     {
         currentNode = currentNode->next;
     }
 
-    Node * nodeToInsert;
+    Node<int> * nodeToInsert;
 
     try
     {
-        nodeToInsert = new Node(value);
+        nodeToInsert = new Node<int>();
+        nodeToInsert->value = value;
     }
     catch (std::bad_alloc& e)
     {
@@ -127,7 +126,7 @@ void IntegerListSorted::insert(int value)
 *   \param index int The index position to be retrieved.
 */
 
-int IntegerListSorted::get (int index)
+int IntegerListSorted::getElement (int index)
 {
     try
     {
@@ -147,7 +146,7 @@ int IntegerListSorted::get (int index)
         return 0;
     }
 
-    Node *currentNode = headNode;
+    Node<int> *currentNode = head;
     for ( int i = 0; (i < index) && currentNode->next != NULL; i++ )
     {
       currentNode = currentNode->next;
@@ -163,9 +162,9 @@ int IntegerListSorted::get (int index)
 *
 */
 
-int IntegerListSorted::count (int value)
+int IntegerListSorted::valueCount (int value)
 {
-    Node *currentNode = headNode;
+    Node<int> *currentNode = head;
     int counter = 0;
 
     while( currentNode )
@@ -187,10 +186,10 @@ int IntegerListSorted::count (int value)
 *
 */
 
-int IntegerListSorted::findElement (int value)
+int IntegerListSorted::valueIndex (int value)
 {
     int counter = 0;
-    Node * currentNode = headNode;
+    Node<int> * currentNode = head;
 
     while (currentNode != NULL)
     {
@@ -213,22 +212,22 @@ int IntegerListSorted::findElement (int value)
 *   \param index int The index position you want to remove.
 */
 
-void IntegerListSorted::removeElement (int index)
+void IntegerListSorted::remove (int index)
 {
     // We'll want to throw an exception here if index > length - 1
 
     // Special case, 0th index
     if (index == 0)
     {
-        Node * nextNode = headNode->next;
-        delete headNode;
-        headNode = nextNode;
+        Node<int> * nextNode = head->next;
+        delete head;
+        head = nextNode;
         nextNode = NULL;
         return;
     }
 
     // General case, Nth index
-    Node * nodeBeforeTargetNode = headNode;
+    Node<int> * nodeBeforeTargetNode = head;
 
     while (index - 1 > 0)
     {
@@ -236,7 +235,7 @@ void IntegerListSorted::removeElement (int index)
         index--;
     }
 
-    Node * nodeAfterTargetNode = nodeBeforeTargetNode->next->next;
+    Node<int> * nodeAfterTargetNode = nodeBeforeTargetNode->next->next;
     delete nodeBeforeTargetNode->next;
     nodeBeforeTargetNode->next = nodeAfterTargetNode;
 

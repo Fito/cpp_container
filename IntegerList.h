@@ -1,12 +1,12 @@
-#ifndef __INTEGERLISTARRAY__H__
-#define __INTEGERLISTARRAY__H__
+#ifndef __INTEGERLIST__H__
+#define __INTEGERLIST__H__
 
-class IntegerListArray{
+class IntegerList{
 private:
 	int *list;
 	int length;
 public:
-	IntegerListArray();
+	IntegerList();
 	void push(int value);
 	int pop();
 	void pushEnd(int value);
