@@ -9,11 +9,31 @@
 #include <exception>
 #include "IntegerListArray.h"
 
-void copyArray(int* source, int* destination, int length)
+/**
+*   Copies the elements from the source array into the destination array.
+*
+*    \param source int* Pointer the source array.
+*    \param destination int* Pointer the destination array.
+*    \param numberOfElements int The number of elements to copy.
+*/
+void copyArray(int* source, int* destination, int numberOfElements)
 {
-  for(int i = 0; i < length; i++) {
+  for(int i = 0; i < numberOfElements; i++) {
     destination[i] = source[i];
   }
+}
+
+/**
+*   Deletes an array and points its reference to a new array.
+*
+*    \param list &int* Reference to the pointer to the array being deleted.
+*    \param newList int* Pointer to the new array.
+*/
+void replaceList(int* &list, int* newList)
+{
+  delete[] list;
+  list = newList;
+  newList = nullptr;
 }
 
 /** Default constructor class. Takes no arguments. */
@@ -78,10 +98,7 @@ void IntegerListArray::push(int value)
     newList[0] = value;
 
     copyArray(list, newList + 1, length);
-
-    delete[] list;
-    list = newList;
-    newList = nullptr;
+    replaceList(list, newList);
 
     return;
 
@@ -134,9 +151,7 @@ int IntegerListArray::pop()
     }
 
     copyArray(list + 1, newList, length);
-    delete[] list;
-    list = newList;
-    newList = nullptr;
+    replaceList(list, newList);;
 
     // The list might be zero length now, delete the array if so
     if (--length == 0)
@@ -181,9 +196,7 @@ void IntegerListArray::pushEnd(int value)
     }
 
     copyArray(list, newList, length);
-    delete[] list;
-    list = newList;
-    newList = nullptr;
+    replaceList(list, newList);
 
     list[length++] = value;
 }
@@ -234,10 +247,7 @@ int IntegerListArray::popEnd()
     }
 
     copyArray(list, newList, length);
-
-    delete[] list;
-    list = newList;
-    newList = nullptr;
+    replaceList(list, newList);
 
     // List might be empty now, if so delete the array
     if (length == 0)
