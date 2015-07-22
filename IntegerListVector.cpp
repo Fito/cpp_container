@@ -5,15 +5,21 @@
 
 /** \file IntegerListVector.cpp */
 
-#include "IntegerListVector.h"
 #include <iostream>
 #include <exception>
+#include "IntegerListVector.h"
 
 /** Default class constructor. Takes no arguments. */
 IntegerListVector::IntegerListVector():
     list(NULL),
     length(0)
     {};
+
+IntegerListVector::~IntegerListVector()
+{
+    delete list;
+}
+
 
 /**
 *   Adds a new value to the top of the list.
@@ -162,4 +168,24 @@ int IntegerListVector::getElement(int element) {
         std::cerr << "Unknown error. " << "\n";
     }
     return returnValue;
+}
+
+/**
+    Sorts elements of the list from lowest to highest.
+*/
+void IntegerListVector::sort() {
+
+    int current_length = list->size();
+
+    for (int outer_pass = 0; outer_pass < current_length; outer_pass++) {
+        for (int inner_pass = 0; inner_pass < current_length - outer_pass - 1; inner_pass++) {
+            if (list->at(inner_pass) > list->at(inner_pass + 1)) {
+
+                int _temp = list->at(inner_pass);               //store pos1 in temp
+                list->at(inner_pass) = list->at(inner_pass+1);  //assign pos2 to pos1
+                list->at(inner_pass+1) = _temp;                  //assign temp to pos2
+
+            }
+        }
+    }
 }

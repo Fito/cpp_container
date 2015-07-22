@@ -1,9 +1,8 @@
 /*  IntegerList.cpp
  *  6/25/15 by MHS
  */
-
-#include "IntegerListVector.h"
 #include <iostream>
+#include "IntegerListVector.h"
 using namespace std;
 
 /**
@@ -15,18 +14,36 @@ int main()
 
 	IntegerListVector list;
 
-	list.push(5);
-	list.pushEnd(13);
+	list.push(15);
+	list.push(27);
+	list.push(39);
+	list.push(24);
+
+	list.pushEnd(11);
+	list.pushEnd(29);
 
 	list.pop();
-
 	list.popEnd();
 
-	list.push(5);
+	list.push(12);
+	list.push(73);
+	list.push(13);
 
-	list.getElement(0);
+	for (int x = 0; x < list.getLength(); x++)
+	{
+		cout << list.getElement(x) << " ";
+	}
 
-	list.getLength();
+	cout << endl;
+
+	list.sort();
+
+	for (int x = 0; x < list.getLength(); x++)
+	{
+		cout << list.getElement(x) << " ";
+	}
+
+	cout << endl;
 
 
 }
