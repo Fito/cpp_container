@@ -1,19 +1,25 @@
-IntegerListArray.o: IntegerListArray.h IntegerListArray.cpp
-	g++ -c IntegerListArray.cpp
+CMD=g++
+OBJS=IntegerListArray.o IntegerListVector.o IntegerListLinked.o IntegerListSorted.o
 
-IntegerListLink.o: IntegerListLink.h IntegerListLink.cpp
-	g++ -c IntegerListLink.cpp
+listTest: listTest.cpp IntegerListArray.h IntegerListVector.h IntegerListLinked.h \
+	  IntegerListSorted.h List.h List.hxx Node.h $(OBJS)
+	$(CMD) -o listTest listTest.cpp $(OBJS)
 
-IntegerListSorted.o: IntegerListSorted.h IntegerListSorted.cpp
-	g++ -c IntegerListSorted.cpp
+IntegerListArray.o: IntegerListArray.cpp IntegerListArray.h
+	$(CMD) -c IntegerListArray.cpp
 
-IntegerListVector.o: IntegerListVector.h IntegerListVector.cpp
-	g++ -c IntegerListVector.cpp
+IntegerListVector.o: IntegerListVector.cpp IntegerListVector.h
+	$(CMD) -c IntegerListVector.cpp
 
-List.o: List.h List.cpp
-	g++ -c List.cpp
+IntegerListLinked.o: IntegerListLinked.cpp IntegerListLinked.h Node.h
+	$(CMD) -c IntegerListLinked.cpp
+
+IntegerListSorted.o: IntegerListSorted.cpp IntegerListSorted.h Node.h
+	$(CMD) -c IntegerListSorted.cpp
 
 clean:
-	rm -f *.o
+	rm -f listTest IntegerListArray.o IntegerListVector.o \
+		IntegerListLinked.o List.o IntegerListSorted.o
 
-
+run: listTest
+	./listTest

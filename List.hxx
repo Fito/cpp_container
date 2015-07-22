@@ -7,26 +7,29 @@
 
 #include <iostream>
 
+void checkListBounds(int index, int length)
+{
+    if ( index < 0 || index > length )
+    {
+      throw std::out_of_range("Element is out of bounds");
+    }
+}
+
+template <typename T>
+void checkListLength(Node<T>* head, int length)
+{
+    if (head == NULL || length == 0)
+    {
+      throw std::length_error("List is empty");
+    }
+}
+
 /** Default constructor class. Takes no arguments. */
 template <typename T>
 List<T>::List():
-    headNode(NULL),
-    endNode(NULL),
+    head(NULL),
     length(0)
     {};
-
-/** Default class destructor. Takes no arguments. */
-template <typename T>
-List<T>::~List()
-{
-    Node<T> * currentNode = headNode;
-
-    while ( currentNode ) {
-        Node<T> * nextNode = currentNode->nextNode;
-        delete currentNode;
-        currentNode = nextNode;
-    }
-}
 
 /**
 *   Add a new integer value to the front of the list.
@@ -37,11 +40,11 @@ template <typename T>
 void List<T>::push(T value)
 {
 
-    Node<T> * assignToNextNode = headNode;
+    Node<T> * assignToNextNode = head;
 
     try
     {
-        headNode = new Node<T>();
+        head = new Node<T>();
     }
     catch (std::bad_alloc& e)
     {
@@ -52,13 +55,8 @@ void List<T>::push(T value)
         std::cerr << "Uknown error." << "\n";
     }
 
-    headNode->value = value;
-    headNode->nextNode = assignToNextNode;
-
-    if (length == 0)
-    {
-        endNode = headNode;
-    }
+    head->value = value;
+    head->next = assignToNextNode;
 
     length++;
 
@@ -76,7 +74,7 @@ T List<T>::pop()
 {
     try
     {
-        checkListLength();
+        checkListLength(head, length);
     }
     catch( std::length_error& e )
     {
@@ -89,18 +87,14 @@ T List<T>::pop()
         return 0;
     }
 
-    int returnValue = headNode->value;
-    Node<T> * assignToHeadNode = headNode->nextNode;
+    int returnValue = head->value;
+    Node<T> * assignToHeadNode = head->next;
 
-    delete headNode;
+    delete head;
 
-    headNode = assignToHeadNode;
+    head = assignToHeadNode;
 
     length--;
-
-    if (length == 0) {
-        endNode = NULL;
-    }
 
     return returnValue;
 }
@@ -113,9 +107,16 @@ T List<T>::pop()
 template <typename T>
 void List<T>::pushEnd(T value)
 {
+    Node<T> * currentNode = head;
+
+    // Traverse the list to get to the end node
+    while ( currentNode->next ) {
+        currentNode = currentNode->next;
+    }
+
     try
     {
-        endNode->nextNode = new Node<T>();
+        currentNode->next = new Node<T>();
     }
     catch (std::bad_alloc& e)
     {
@@ -128,9 +129,9 @@ void List<T>::pushEnd(T value)
         return;
     }
 
-    endNode = endNode->nextNode;
-    endNode->value = value;
-    endNode->nextNode = NULL;
+    currentNode = currentNode->next;
+    currentNode->value = value;
+    currentNode->next = NULL;
 
     length++;
 
@@ -148,7 +149,7 @@ T List<T>::popEnd()
 {
     try
     {
-        checkListLength();
+        checkListLength(head, length);
     }
     catch( std::length_error& e )
     {
@@ -162,20 +163,18 @@ T List<T>::popEnd()
     }
 
     Node<T> * previousNode = NULL;
-    Node<T> * currentNode = headNode;
+    Node<T> * currentNode = head;
 
-    while (currentNode->nextNode != NULL) {
+    while (currentNode->next != NULL) {
         previousNode = currentNode;
-        currentNode = currentNode->nextNode;
+        currentNode = currentNode->next;
     }
 
     int returnValue = currentNode->value;
 
     delete currentNode;
 
-    endNode = previousNode;
-
-    endNode->nextNode = NULL;
+    previousNode-next = NULL;
 
     length--;
 
@@ -208,7 +207,7 @@ T List<T>::getElement(int element)
 {
     try
     {
-        checkListBounds(element);
+        checkListBounds(element, length);
     }
     catch( std::out_of_range& e )
     {
@@ -221,84 +220,12 @@ T List<T>::getElement(int element)
         return 0;
     }
 
-    Node<T> * currentNode = headNode;
+    Node<T> * currentNode = head;
 
     for(int i = element; i > 0; i--) {
-        currentNode = currentNode->nextNode;
+        currentNode = currentNode->next;
     }
 
     return currentNode->value;
 
-}
-
-/**
-    Sorts the current list in ascending order using the bubblesort method.
-*/
-template <typename T>
-void List<T>::sort ()
-{
-
-    Node<T> * preNode = NULL;
-    Node<T> * leftNode = NULL;
-    Node<T> * rightNode = NULL;
-
-    for (int ol = 0; ol < length - 1; ol++)
-    {
-
-        if (headNode->value > headNode->nextNode->value)
-        {
-            preNode = NULL;
-            leftNode = headNode;
-            rightNode = headNode->nextNode;
-
-            headNode = rightNode;
-            leftNode->nextNode = rightNode->nextNode;
-            rightNode->nextNode = leftNode;
-
-        }
-
-        preNode = headNode;
-        leftNode = headNode->nextNode;
-        rightNode = headNode->nextNode->nextNode;
-
-        for (int il = 0; il < length - ol - 2; il++)
-        {
-            if (leftNode->value > rightNode->value)
-            {
-                preNode->nextNode = rightNode;
-                leftNode->nextNode = rightNode->nextNode;
-                rightNode->nextNode = leftNode;
-
-                preNode = rightNode;
-                leftNode = leftNode;
-                rightNode = leftNode->nextNode;
-            }
-            else
-            {
-
-                preNode = leftNode;
-                leftNode = rightNode;
-                rightNode = leftNode->nextNode;
-
-            }
-        }
-    }
-}   // end sort
-
-template <typename T>
-void List<T>::checkListBounds(int index)
-{
-    if ( index < 0 || index > length )
-    {
-      throw std::out_of_range("Element is out of bounds");
-    }
-}
-
-template <typename T>
-void List<T>::checkListLength()
-{
-    if (headNode == NULL || length == 0)
-    {
-      throw std::length_error("List is empty");
-    }
 }
