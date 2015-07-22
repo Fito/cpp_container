@@ -6,17 +6,14 @@
 /** \file IntegerListVector.cpp */
 
 #include "IntegerListVector.h"
+#include <iostream>
 #include <exception>
 
 /** Default class constructor. Takes no arguments. */
 IntegerListVector::IntegerListVector():
-    list(NULL)
+    list(NULL),
+    length(0)
     {};
-
-/** Default class destructor. Takes no arguments. */
-IntegerListVector::~IntegerListVector() {
-    delete list;
-}
 
 /**
 *   Adds a new value to the top of the list.
@@ -36,11 +33,12 @@ void IntegerListVector::push(int value) {
       }
       catch( ... )
       {
-        std::cerr << "Unknown error." << "\n";
+        std::cerr << "Unknown error. " << "\n";
       }
     }
 
     list->insert(list->begin(), value);
+    length++;
 }
 
 /**
@@ -48,10 +46,11 @@ void IntegerListVector::push(int value) {
 *
 *   \returns int The top element of the list.
 */
-int IntegerListVector::pop() {
+int IntegerListVector::pop()
+{
     try
     {
-        checkListLength();
+        if (length == 0) { throw new std::length_error("List is empty."); }
     }
     catch( std::length_error& e )
     {
@@ -60,7 +59,7 @@ int IntegerListVector::pop() {
     }
     catch( ... )
     {
-        std::cerr << "Unknown error." << "\n";
+        std::cerr << "Unknown error. " << "\n";
         return 0;
     }
 
@@ -68,6 +67,7 @@ int IntegerListVector::pop() {
     returnValue = list->front();
 
     list->erase(list->begin());
+    length--;
     return returnValue;
 }
 
@@ -89,11 +89,12 @@ void IntegerListVector::pushEnd(int value) {
       }
       catch( ... )
       {
-          std::cerr << "Unknown error." << "\n";
+          std::cerr << "Unknown error. " << "\n";
       }
     }
 
     list->push_back(value);
+    length++;
 }
 
 /**
@@ -104,7 +105,7 @@ void IntegerListVector::pushEnd(int value) {
 int IntegerListVector::popEnd() {
     try
     {
-        checkListLength();
+        if (length == 0) { throw new std::length_error("List is emtpy."); }
     }
     catch( std::length_error& e )
     {
@@ -113,12 +114,13 @@ int IntegerListVector::popEnd() {
     }
     catch( ... )
     {
-        std::cerr << "Unknown error." << "\n";
+        std::cerr << "Unknown error. " << "\n";
         return 0;
     }
 
     int returnValue = list->back();
     list->pop_back();
+    length--;
     return returnValue;
 }
 
@@ -157,35 +159,7 @@ int IntegerListVector::getElement(int element) {
     }
     catch( ... )
     {
-        std::cerr << "Unknown error." << "\n";
+        std::cerr << "Unknown error. " << "\n";
     }
     return returnValue;
-}
-
-
-/**
-    Sorts elements of the list from lowest to highest.
-*/
-void IntegerListVector::sort() {
-
-    int current_length = list->size();
-
-    for (int outer_pass = 0; outer_pass < current_length; outer_pass++) {
-        for (int inner_pass = 0; inner_pass < current_length - outer_pass - 1; inner_pass++) {
-            if (list->at(inner_pass) > list->at(inner_pass + 1)) {
-
-                int _temp = list->at(inner_pass);               //store pos1 in temp
-                list->at(inner_pass) = list->at(inner_pass+1);  //assign pos2 to pos1
-                list->at(inner_pass+1) = _temp;                  //assign temp to pos2
-
-            }
-        }
-    }
-}
-
-void IntegerListVector::checkListLength() {
-    if (list == NULL || list->size() == 0)
-    {
-      throw std::length_error("List is empty");
-    }
 }
