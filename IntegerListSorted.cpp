@@ -16,17 +16,17 @@ IntegerListSorted::IntegerListSorted():
         {};
 
 /** Default destructor class. Takes no arguments. */
-// IntegerListSorted::~IntegerListSorted()
-// {
-//     Node<int> * currentNode = head;
-//
-//     while (currentNode)
-//     {
-//         Node<int> * nextNode = currentNode->next;
-//         delete currentNode;
-//         currentNode = nextNode;
-//     }
-// }
+IntegerListSorted::~IntegerListSorted()
+{
+    Node<int> * currentNode = head;
+
+    while (currentNode)
+    {
+        Node<int> * nextNode = currentNode->next;
+        delete currentNode;
+        currentNode = nextNode;
+    }
+}
 
 /**
 *   Add a new integer value to the list. The item will be sorted into ascending order.

@@ -18,9 +18,15 @@ void copyArray(int* source, int* destination, int length)
 
 /** Default constructor class. Takes no arguments. */
 IntegerListArray::IntegerListArray():
-  list(nullptr),
-  length(0)
-  {};
+    list(nullptr),
+    length(0)
+    {};
+
+/** Default destructor class. Takes no arguments. */
+IntegerListArray::~IntegerListArray()
+{
+    delete[] list;
+}
 
 /**
 *   Add a new integer value to the front of the list.
@@ -289,16 +295,16 @@ int IntegerListArray::getElement(int element)
 /**
     Sorts the current list in ascending order using the bubblesort method.
 */
-// void IntegerListArray::sort ()
-// {
-//     for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
-//         for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
-//
-//             if (list[inner_pass] > list[inner_pass+1]) {
-//                 int tempStorage = list[inner_pass];
-//                 list[inner_pass] = list[inner_pass+1];
-//                 list[inner_pass+1] = tempStorage;
-//             }
-//         }
-//     }
-// }
+void IntegerListArray::sort ()
+{
+    for (int outer_pass = 0; outer_pass < length - 1; outer_pass++) {
+        for (int inner_pass = 0; inner_pass < length - outer_pass - 1; inner_pass++) {
+
+            if (list[inner_pass] > list[inner_pass+1]) {
+                int tempStorage = list[inner_pass];
+                list[inner_pass] = list[inner_pass+1];
+                list[inner_pass+1] = tempStorage;
+            }
+        }
+    }
+}
