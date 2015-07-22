@@ -9,12 +9,14 @@ private:
 	int length;
 public:
 	IntegerListLinked();
+	~IntegerListLinked();
 	void push(int value);
 	int pop();
 	void pushEnd(int value);
 	int popEnd();
 	int getLength();
 	int getElement(int element);
+	void sort();
 };
 
 #endif

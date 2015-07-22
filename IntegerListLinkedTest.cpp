@@ -34,4 +34,21 @@ int main(){
 	list.popEnd();
 	cout << "PoppedEnd.\n";
 
+	list.push(3);
+	list.push(9);
+	list.push(5);
+	list.push(1);
+	list.push(7);
+	cout << "Pushed a bunch more.\n";
+
+	list.sort();
+	cout << "Sorted.\n";
+
+	for (int x = 0; x < list.getLength(); x++)
+	{
+		cout << list.getElement(x) << " ";
+	}
+
+	cout << endl;
+
 }

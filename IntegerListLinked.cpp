@@ -15,6 +15,18 @@ IntegerListLinked::IntegerListLinked():
     length(0)
     {};
 
+/** Default destructor class. Takes no arguments */
+IntegerListLinked::~IntegerListLinked()
+{
+    Node<int> * currentNode = head;
+
+    while (currentNode != NULL)
+    {
+        Node<int> * next = currentNode->next;
+        delete currentNode;
+        currentNode = next;
+    }
+}
 
 /**
 *   Add a new integer value to the front of the list.
@@ -24,7 +36,7 @@ IntegerListLinked::IntegerListLinked():
 void IntegerListLinked::push (int value)
 {
 
-    Node<int> * oldHeadNode = head;
+    Node<int> * oldhead = head;
 
     try
     {
@@ -42,7 +54,7 @@ void IntegerListLinked::push (int value)
     }
 
     head->value = value;
-    head->next = oldHeadNode;
+    head->next = oldhead;
 
     length++;
 
@@ -215,3 +227,54 @@ int IntegerListLinked::getElement(int element)
     return currentNode->value;
 
 }
+
+void IntegerListLinked::sort () {
+
+    Node<int> * preNode = NULL;
+    Node<int> * leftNode = NULL;
+    Node<int> * rightNode = NULL;
+
+    for (int ol = 0; ol < length - 1; ol++)
+    {
+
+        if (head->value > head->next->value)
+        {
+            preNode = NULL;
+            leftNode = head;
+            rightNode = head->next;
+
+            head = rightNode;
+            leftNode->next = rightNode->next;
+            rightNode->next = leftNode;
+
+        }
+
+        preNode = head;
+        leftNode = head->next;
+        rightNode = head->next->next;
+
+        for (int il = 0; il < length - ol - 2; il++)
+        {
+            if (leftNode->value > rightNode->value)
+            {
+                preNode->next = rightNode;
+                leftNode->next = rightNode->next;
+                rightNode->next = leftNode;
+
+                preNode = rightNode;
+                leftNode = leftNode;
+                rightNode = leftNode->next;
+
+            } else {
+
+                preNode = leftNode;
+                leftNode = rightNode;
+                rightNode = leftNode->next;
+
+            }
+        }
+
+    }
+
+
+}   // end sort
