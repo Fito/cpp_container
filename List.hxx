@@ -6,7 +6,14 @@
 /** \file List<T>.cpp */
 
 #include <iostream>
+using namespace std;
 
+/**
+*   Throws an out of range exception if index is out of range.
+*
+*    \param index int The index to be accessed.
+*    \param length int The length for which to check bounds.
+*/
 void checkListBounds(int index, int length)
 {
     if ( index < 0 || index > length )
@@ -15,6 +22,12 @@ void checkListBounds(int index, int length)
     }
 }
 
+/**
+*   Throws a length error exception if the list is empty.
+*
+*    \param head Node<T>* A pointer to the first Node in the list.
+*    \param length int The length of the list.
+*/
 template <typename T>
 void checkListLength(Node<T>* head, int length)
 {
@@ -30,6 +43,20 @@ List<T>::List():
     head(NULL),
     length(0)
     {};
+
+/** Default destructor class. Takes no arguments. */
+template <typename T>
+List<T>::~List()
+{
+    Node<T> * currentNode = head;
+
+    while(currentNode)
+    {
+      Node<T> * next = currentNode->next;
+      delete currentNode;
+      currentNode = next;
+    }
+}
 
 /**
 *   Add a new integer value to the front of the list.
@@ -229,3 +256,57 @@ T List<T>::getElement(int element)
     return currentNode->value;
 
 }
+
+/**
+    Sorts the current list in ascending order using the bubblesort method.
+*/
+template <typename T>
+void List<T>::sort ()
+{
+
+    Node<T> * preNode = NULL;
+    Node<T> * leftNode = NULL;
+    Node<T> * rightNode = NULL;
+
+    for (int ol = 0; ol < length - 1; ol++)
+    {
+
+        if (head->value > head->next->value)
+        {
+            preNode = NULL;
+            leftNode = head;
+            rightNode = head->next;
+
+            head = rightNode;
+            leftNode->next = rightNode->next;
+            rightNode->next = leftNode;
+
+        }
+
+        preNode = head;
+        leftNode = head->next;
+        rightNode = head->next->next;
+
+        for (int il = 0; il < length - ol - 2; il++)
+        {
+            if (leftNode->value > rightNode->value)
+            {
+                preNode->next = rightNode;
+                leftNode->next = rightNode->next;
+                rightNode->next = leftNode;
+
+                preNode = rightNode;
+                leftNode = leftNode;
+                rightNode = leftNode->next;
+            }
+            else
+            {
+
+                preNode = leftNode;
+                leftNode = rightNode;
+                rightNode = leftNode->next;
+
+            }
+        }
+    }
+}   // end sort

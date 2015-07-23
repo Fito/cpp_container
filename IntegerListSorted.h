@@ -8,6 +8,7 @@ private:
 	int length;
 public:
 	IntegerListSorted();
+	~IntegerListSorted();
 	void insert(int value);
 	void remove(int index);
 	int valueCount(int value);

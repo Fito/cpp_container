@@ -32,13 +32,13 @@ int main(){
 		cout << list.getElement(i) << endl;
 	}
 
-	// list.sort();
-	//
-	// cout << "after sorting" << endl;
-	// length = list.getLength();
-	//
-	// for(int i = 0; i < length; i++)
-	// {
-	// 	cout << list.getElement(i) << endl;
-	// }
+	list.sort();
+
+	cout << "after sorting" << endl;
+	length = list.getLength();
+
+	for(int i = 0; i < length; i++)
+	{
+		cout << list.getElement(i) << endl;
+	}
 }
