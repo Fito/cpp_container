@@ -5,6 +5,31 @@
 
 /** \file IntegerListArray.cpp */
 
+/**
+*   \mainpage
+*   <h1>IntegerList Library</h1>
+*   <h3>Adolfo Von Zastrow and Brook Thomas</h3>
+*
+*   <p>The IntegerList Library provides four integer-type %List classes of varying container types,
+*    along with a type-independent %List template.</p>
+*
+*   <p>IntegerList Library classes automatically handle heap memory allocation and deallocation,
+*   as well as complete clean-up upon list deletion.</p>
+*
+*   <h4>The following classes are provided...</h4>
+*
+*   <p><b>IntegerListArray</b> - An integer-specific array-based container that supports double-ended insertion and retrieval</p>
+*   <p><b>IntegerListVector</b> - An integer-specific container utilizing the Standard Template Library's Vector template.</p>
+*   <p><b>IntegerListLinked</b> - An integer-specific singly-linked list container that supports double-ended insertion and retrieval.</p>
+*   <p><b>IntegerListSorted</b> - An integer-specific singly-linked list container with front-end only insertion and retrieval. Inserted
+        elements are automatically sorted into ASCENDING order.</p>
+*
+*   <h4>The following template is also provided...</h4>
+*
+*   <p><b>List</b> - A type-independent container template that supports double-ended insertion and retrieval.</p>
+*
+*/
+
 #include <iostream>
 #include <exception>
 #include "IntegerListArray.h"
