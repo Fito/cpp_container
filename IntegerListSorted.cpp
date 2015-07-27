@@ -9,13 +9,13 @@
 #include <iostream>
 #include "IntegerListSorted.h"
 
-/** Default constructor class. Takes no arguments. */
+/** Class constructor. Takes no arguments. */
 IntegerListSorted::IntegerListSorted():
         head(NULL),
         length(0)
         {};
 
-/** Default destructor class. Takes no arguments. */
+/** Class destructor. Will deallocate from the heap any remaining nodes. */
 IntegerListSorted::~IntegerListSorted()
 {
     Node<int> * currentNode = head;
@@ -29,7 +29,7 @@ IntegerListSorted::~IntegerListSorted()
 }
 
 /**
-*   Add a new integer value to the list. The item will be sorted into ascending order.
+*   Add a new integer value to the list. Items are automatically sorted into ascending order.
 *
 *    \param value int The integer value to be added.
 */
@@ -121,11 +121,10 @@ void IntegerListSorted::insert(int value)
 /**
 *   Retrieve the integer at the provided index value.
 *   Returns a value of 0 if the index position is not valid.
-*   We strongly advise checking length before calling get().
+*   We strongly advise checking length using getLength() before calling this method.
 *
 *   \param index int The index position to be retrieved.
 */
-
 int IntegerListSorted::getElement (int index)
 {
     try
@@ -156,12 +155,11 @@ int IntegerListSorted::getElement (int index)
 }
 
 /**
-*   Given an integer value, count() will return the instances of that value within the list.
+*   Given an integer value, will return the number of instances of that value within the list.
 *
 *   \param value int The integer value to count instances of.
 *
 */
-
 int IntegerListSorted::valueCount (int value)
 {
     Node<int> *currentNode = head;
@@ -177,7 +175,7 @@ int IntegerListSorted::valueCount (int value)
 }
 
 /**
-*   Given a integer value, returns the index position of the first instance of that value.
+*   Given an integer value, returns the index position of the first instance of that value.
 *   If no instance is found, a value of -1 is returned.
 *
 *   \param value int The integer value to find.
@@ -185,7 +183,6 @@ int IntegerListSorted::valueCount (int value)
 *   \returns int The index position of the first instance of the element, or -1 if no instance found.
 *
 */
-
 int IntegerListSorted::valueIndex (int value)
 {
     int counter = 0;
@@ -211,7 +208,6 @@ int IntegerListSorted::valueIndex (int value)
 *
 *   \param index int The index position you want to remove.
 */
-
 void IntegerListSorted::remove (int index)
 {
     // We'll want to throw an exception here if index > length - 1

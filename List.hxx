@@ -37,14 +37,14 @@ void checkListLength(Node<T>* head, int length)
     }
 }
 
-/** Default constructor class. Takes no arguments. */
+/** Class constructor. Takes no arguments. */
 template <typename T>
 List<T>::List():
     head(NULL),
     length(0)
     {};
 
-/** Default destructor class. Takes no arguments. */
+/** Class destructor. Will deallocate from the heap any remaining nodes. */
 template <typename T>
 List<T>::~List()
 {
@@ -167,7 +167,7 @@ void List<T>::pushEnd(T value)
 /**
 *   Removes and returns an integer value from the back of the list.
 *   If list is empty a value of zero is returned.
-*   It is strongly advised you check list size before calling the pop() method.
+*   It is strongly advised you check list size before calling the popEnd() method.
 *
 *   \returns int The integer value at the back of the list, if available.
 */
@@ -221,7 +221,7 @@ int List<T>::getLength()
 }
 
 /**
-*   Returns the integer at the given index value, if valid.
+*   Returns the integer at the given index value.
 *   If the index value is invalid, zero will be returned.
 *   We strongly advise checking length before calling getElement to ensure your request is valid.
 *

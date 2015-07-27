@@ -9,13 +9,13 @@
 #include "IntegerListLinked.h"
 
 
-/** Default constructor class. Takes no arguments. */
+/** Constructor class. Takes no arguments. */
 IntegerListLinked::IntegerListLinked():
     head(NULL),
     length(0)
     {};
 
-/** Default destructor class. Takes no arguments */
+/** Destructor class. Will deallocate from the heap any remaining nodes. */
 IntegerListLinked::~IntegerListLinked()
 {
     Node<int> * currentNode = head;
@@ -139,7 +139,7 @@ void IntegerListLinked::pushEnd(int value)
 /**
 *   Removes and returns an integer value from the back of the list.
 *   If list is empty a value of zero is returned.
-*   It is strongly advised you check list size before calling the pop() method.
+*   It is strongly advised you check list size before calling the popEnd() method.
 *
 *   \returns int The integer value at the back of the list, if available.
 */
@@ -193,7 +193,7 @@ int IntegerListLinked::getLength()
 }
 
 /**
-*   Returns the integer at the given index value, if valid.
+*   Returns the integer at the given index value.
 *   If the index value is invalid, zero will be returned.
 *   We strongly advise checking length before calling getElement to ensure your request is valid.
 *
@@ -228,6 +228,7 @@ int IntegerListLinked::getElement(int element)
 
 }
 
+/** Sorts the current list in place using the bubblesort method */
 void IntegerListLinked::sort () {
 
     Node<int> * preNode = NULL;

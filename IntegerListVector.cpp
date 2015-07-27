@@ -9,17 +9,17 @@
 #include <exception>
 #include "IntegerListVector.h"
 
-/** Default class constructor. Takes no arguments. */
+/** Class constructor. Takes no arguments. */
 IntegerListVector::IntegerListVector():
     list(NULL),
     length(0)
     {};
 
+/** Class destructor. Relies upon std::vector destructor for heap deallocation. */
 IntegerListVector::~IntegerListVector()
 {
     delete list;
 }
-
 
 /**
 *   Adds a new value to the top of the list.
@@ -49,6 +49,7 @@ void IntegerListVector::push(int value) {
 
 /**
 *   Removes and returns a single value from the top of the list.
+*   If list is empty this will return 0.
 *
 *   \returns int The top element of the list.
 */
@@ -105,6 +106,7 @@ void IntegerListVector::pushEnd(int value) {
 
 /**
 *    Removes and returns a single value from the bottom of the list.
+*   If list is empty this will return 0.
 *
 *    \returns int The bottom element of the list.
 */

@@ -7,22 +7,26 @@
 
 /**
 *   \mainpage
-*   <h1>IntegerList Library</h1>
 *   <h3>Adolfo Von Zastrow and Brook Thomas</h3>
+*   <h3>CSC 340 - Programming Methodology - Summer 2015</h3>
 *
-*   <p>The IntegerList Library provides four integer-type %List classes of varying container types,
+*   <p>IntegerList provides four integer-type %List classes of varying container types,
 *    along with a type-independent %List template.</p>
 *
-*   <p>IntegerList Library classes automatically handle heap memory allocation and deallocation,
-*   as well as complete clean-up upon list deletion.</p>
+*   <h4>Common features...</h4>
+*   <ul>
+*    <li>Automatic memory management.</li>
+*   <li>Robust exception handling using the std::exception class.</li>
+*   <li>Methods for arbitrary element retrieval and sorting.</li>
+*   </ul>
 *
 *   <h4>The following classes are provided...</h4>
 *
-*   <p><b>IntegerListArray</b> - An integer-specific array-based container that supports double-ended insertion and retrieval</p>
-*   <p><b>IntegerListVector</b> - An integer-specific container utilizing the Standard Template Library's Vector template.</p>
-*   <p><b>IntegerListLinked</b> - An integer-specific singly-linked list container that supports double-ended insertion and retrieval.</p>
-*   <p><b>IntegerListSorted</b> - An integer-specific singly-linked list container with front-end only insertion and retrieval. Inserted
-        elements are automatically sorted into ASCENDING order.</p>
+*   <p><b>IntegerListArray</b> - An integer-type array-based container that supports double-ended insertion and retrieval.</p>
+*   <p><b>IntegerListVector</b> - An integer-type container utilizing the Standard Template Library's Vector template.</p>
+*   <p><b>IntegerListLinked</b> - An integer-type singly-linked list container that supports double-ended insertion and retrieval.</p>
+*   <p><b>IntegerListSorted</b> - An integer-type singly-linked list container that automatically orders elements ASCENDING upon insertion.
+*        Note that %IntegerListSorted does not support End insertion or retrieval.</p>
 *
 *   <h4>The following template is also provided...</h4>
 *
@@ -61,13 +65,13 @@ void replaceList(int* &list, int* newList)
   newList = nullptr;
 }
 
-/** Default constructor class. Takes no arguments. */
+/** Class constructor. Takes no arguments. */
 IntegerListArray::IntegerListArray():
     list(nullptr),
     length(0)
     {};
 
-/** Default destructor class. Takes no arguments. */
+/** Class destructor. Will deallocate from the heap any remaining elements in the list array. */
 IntegerListArray::~IntegerListArray()
 {
     delete[] list;
@@ -229,7 +233,7 @@ void IntegerListArray::pushEnd(int value)
 /**
 *   Removes and returns an integer value from the back of the list.
 *   If list is empty a value of zero is returned.
-*   It is strongly advised you check list size before calling the pop() method.
+*   It is strongly advised you check list size before calling the popEnd() method.
 *
 *   \returns int The integer value at the back of the list, if available.
 */
@@ -295,9 +299,9 @@ int IntegerListArray::getLength()
 }
 
 /**
-*   Returns the integer at the given index value, if valid.
+*   Returns the integer at the given index value.
 *   If the index value is invalid, zero will be returned.
-*   We strongly advise checking length before calling getElement to ensure your request is valid.
+*   We strongly advise checking length before calling getElement() to ensure your request is valid.
 *
 *    \param element int An index value in the list.
 *
